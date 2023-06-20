@@ -12,7 +12,7 @@ class MyColor {
     ),
     elevatedButtonTheme: ElevatedButtonThemeData(
       style: ElevatedButton.styleFrom(
-        primary: green,
+        backgroundColor: green,
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(10),
         ),
@@ -35,42 +35,42 @@ class MyColor {
     ),
     fontFamily: "Poppins-Regular",
     textTheme: const TextTheme(
-      bodyText1: TextStyle(
+      bodyLarge: TextStyle(
         fontSize: 18,
         color: Colors.white,
         fontFamily: "Poppins-SemiBold",
       ),
-      bodyText2: TextStyle(
+      bodyMedium: TextStyle(
         fontSize: 18,
         color: Colors.black,
         fontFamily: "Poppins-SemiBold",
       ),
-      headline1: TextStyle(
+      displayLarge: TextStyle(
         fontSize: 20,
         color: Colors.white,
         fontFamily: "Poppins-Bold",
       ),
-      headline2: TextStyle(
+      displayMedium: TextStyle(
         fontSize: 20,
         color: Colors.white,
         fontFamily: "Poppins-SemiBold",
       ),
-      headline3: TextStyle(
+      displaySmall: TextStyle(
         fontSize: 16,
         color: Colors.black,
         fontFamily: "Poppins-SemiBold",
       ),
-      headline4: TextStyle(
+      headlineMedium: TextStyle(
         fontSize: 14,
         color: Colors.black,
         fontFamily: "Poppins-SemiBold",
       ),
-      headline5: TextStyle(
+      headlineSmall: TextStyle(
         fontSize: 14,
         color: Colors.black,
         fontFamily: "Poppins-Regular",
       ),
-      headline6: TextStyle(
+      titleLarge: TextStyle(
         fontSize: 12,
         color: Colors.black,
         fontFamily: "Poppins-Regular",

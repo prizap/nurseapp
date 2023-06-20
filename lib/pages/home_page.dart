@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/src/foundation/key.dart';
-import 'package:flutter/src/widgets/framework.dart';
 import 'package:lottie/lottie.dart';
 import 'package:nurse_application_1/const/xcolors.dart';
+
+import 'package:nurse_application_1/pages/survey_page2.dart';
 
 import '../const/xfonts.dart';
 
@@ -75,7 +75,13 @@ class HomePage extends StatelessWidget {
               //padding: const EdgeInsets.only(top: 20),
               padding: const EdgeInsets.all(10),
               child: ElevatedButton(
-                onPressed: () {},
+                onPressed: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                        builder: (context) => const SurveyPage2()),
+                  );
+                },
                 style: ButtonStyle(
                   backgroundColor: MaterialStateProperty.all(MyColor.hijau3),
                   shape: MaterialStateProperty.all(

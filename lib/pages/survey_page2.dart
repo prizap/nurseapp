@@ -48,6 +48,8 @@ class _SurveyPage2State extends State<SurveyPage2> {
   bool _breathingSuaraNafasCreckels = false;
   bool _breathingSuaraNafasAbsent = false;
   bool _circulationNadiNormal = false;
+  bool _circulationNadiTakikardi = false;
+  bool _circulationNadiBradikardi = false;
 
   var ctrlNoReg = TextEditingController();
 
@@ -212,10 +214,133 @@ class _SurveyPage2State extends State<SurveyPage2> {
                 MyTextSemiBold(size: 12, teks: 'Nadi'),
                 textFld(ctrl: ctrlNoReg, txt: 'Nadi (x/Menit)'),
                 buildFrekuensiNadi(),
+                circulationNadiNormal(),
+                circulationNadiTakikardi(),
+                circulationNadiBradikardi(),
                 //MyCheckBox(onChanged: _handleCheckBox, label: 'Normal')
                 //myCheckBox(teks: 'Normal', xvalue: _circulationNadiNormal, ),
               ],
             ),
+          ),
+        ],
+      ),
+    );
+  }
+
+  GFCard circulationNadiBradikardi() {
+    return GFCard(
+      margin: const EdgeInsets.all(1),
+      padding: const EdgeInsets.symmetric(horizontal: 5, vertical: 5),
+      content: Column(
+        children: [
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              Flexible(
+                child: MyTextRegular(
+                  size: 12,
+                  warna: Colors.black87,
+                  teks: 'Bradikardi',
+                ),
+              ),
+              Flexible(
+                child: GFCheckbox(
+                  size: GFSize.SMALL,
+                  type: GFCheckboxType.basic,
+                  activeBgColor: MyColor.hijau2,
+                  //activeIcon: const Icon(Icons.check, size: 10, color: GFColors.WHITE),,
+                  onChanged: (value) {
+                    setState(() {
+                      _circulationNadiBradikardi = value;
+                      print(
+                          'value breathing _circulationNadiBradikardi  $_circulationNadiBradikardi ');
+                    });
+                  },
+                  value: _circulationNadiBradikardi,
+                  inactiveIcon: null,
+                ),
+              )
+            ],
+          ),
+        ],
+      ),
+    );
+  }
+
+  GFCard circulationNadiTakikardi() {
+    return GFCard(
+      margin: const EdgeInsets.all(1),
+      padding: const EdgeInsets.symmetric(horizontal: 5, vertical: 5),
+      content: Column(
+        children: [
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              Flexible(
+                child: MyTextRegular(
+                  size: 12,
+                  warna: Colors.black87,
+                  teks: 'Takikardi',
+                ),
+              ),
+              Flexible(
+                child: GFCheckbox(
+                  size: GFSize.SMALL,
+                  type: GFCheckboxType.basic,
+                  activeBgColor: MyColor.hijau2,
+                  //activeIcon: const Icon(Icons.check, size: 10, color: GFColors.WHITE),,
+                  onChanged: (value) {
+                    setState(() {
+                      _circulationNadiTakikardi = value;
+                      print(
+                          'value breathing _circulationNadiTakikardi  $_circulationNadiTakikardi ');
+                    });
+                  },
+                  value: _circulationNadiTakikardi,
+                  inactiveIcon: null,
+                ),
+              )
+            ],
+          ),
+        ],
+      ),
+    );
+  }
+
+  GFCard circulationNadiNormal() {
+    return GFCard(
+      margin: const EdgeInsets.all(1),
+      padding: const EdgeInsets.symmetric(horizontal: 5, vertical: 5),
+      content: Column(
+        children: [
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              Flexible(
+                child: MyTextRegular(
+                  size: 12,
+                  warna: Colors.black87,
+                  teks: 'Normal',
+                ),
+              ),
+              Flexible(
+                child: GFCheckbox(
+                  size: GFSize.SMALL,
+                  type: GFCheckboxType.basic,
+                  activeBgColor: MyColor.hijau2,
+                  //activeIcon: const Icon(Icons.check, size: 10, color: GFColors.WHITE),,
+                  onChanged: (value) {
+                    setState(() {
+                      _circulationNadiNormal = value;
+                      print(
+                          'value breathing _circulationNadiNormal $_circulationNadiNormal');
+                    });
+                  },
+                  value: _circulationNadiNormal,
+                  inactiveIcon: null,
+                ),
+              )
+            ],
           ),
         ],
       ),

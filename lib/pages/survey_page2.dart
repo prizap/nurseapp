@@ -50,6 +50,9 @@ class _SurveyPage2State extends State<SurveyPage2> {
   bool _circulationNadiNormal = false;
   bool _circulationNadiTakikardi = false;
   bool _circulationNadiBradikardi = false;
+  bool _circulationNadiPalpitasi = false;
+  bool _circulationKualitasRegular = false;
+  bool _circulationKualitasIrregular = false;
 
   var ctrlNoReg = TextEditingController();
 
@@ -217,10 +220,134 @@ class _SurveyPage2State extends State<SurveyPage2> {
                 circulationNadiNormal(),
                 circulationNadiTakikardi(),
                 circulationNadiBradikardi(),
+                circulationNadiPalpitasi(),
+                MyTextSemiBold(size: 12, teks: 'Kualitas'),
+                circulationKualitasRegular(),
+                circulationKualitasIrregular(),
                 //MyCheckBox(onChanged: _handleCheckBox, label: 'Normal')
                 //myCheckBox(teks: 'Normal', xvalue: _circulationNadiNormal, ),
               ],
             ),
+          ),
+        ],
+      ),
+    );
+  }
+
+  GFCard circulationKualitasIrregular() {
+    return GFCard(
+      margin: const EdgeInsets.all(1),
+      padding: const EdgeInsets.symmetric(horizontal: 5, vertical: 5),
+      content: Column(
+        children: [
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              Flexible(
+                child: MyTextRegular(
+                  size: 12,
+                  warna: Colors.black87,
+                  teks: 'Regular',
+                ),
+              ),
+              Flexible(
+                child: GFCheckbox(
+                  size: GFSize.SMALL,
+                  type: GFCheckboxType.basic,
+                  activeBgColor: MyColor.hijau2,
+                  //activeIcon: const Icon(Icons.check, size: 10, color: GFColors.WHITE),,
+                  onChanged: (value) {
+                    setState(() {
+                      _circulationKualitasIrregular = value;
+                      print(
+                          'value breathing _circulationKualitasIrregular  $_circulationKualitasIrregular ');
+                    });
+                  },
+                  value: _circulationKualitasIrregular,
+                  inactiveIcon: null,
+                ),
+              )
+            ],
+          ),
+        ],
+      ),
+    );
+  }
+
+  GFCard circulationKualitasRegular() {
+    return GFCard(
+      margin: const EdgeInsets.all(1),
+      padding: const EdgeInsets.symmetric(horizontal: 5, vertical: 5),
+      content: Column(
+        children: [
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              Flexible(
+                child: MyTextRegular(
+                  size: 12,
+                  warna: Colors.black87,
+                  teks: 'Regular',
+                ),
+              ),
+              Flexible(
+                child: GFCheckbox(
+                  size: GFSize.SMALL,
+                  type: GFCheckboxType.basic,
+                  activeBgColor: MyColor.hijau2,
+                  //activeIcon: const Icon(Icons.check, size: 10, color: GFColors.WHITE),,
+                  onChanged: (value) {
+                    setState(() {
+                      _circulationKualitasRegular = value;
+                      print(
+                          'value breathing _circulationKualitasRegular  $_circulationKualitasRegular ');
+                    });
+                  },
+                  value: _circulationKualitasRegular,
+                  inactiveIcon: null,
+                ),
+              )
+            ],
+          ),
+        ],
+      ),
+    );
+  }
+
+  GFCard circulationNadiPalpitasi() {
+    return GFCard(
+      margin: const EdgeInsets.all(1),
+      padding: const EdgeInsets.symmetric(horizontal: 5, vertical: 5),
+      content: Column(
+        children: [
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              Flexible(
+                child: MyTextRegular(
+                  size: 12,
+                  warna: Colors.black87,
+                  teks: 'Palpitasi',
+                ),
+              ),
+              Flexible(
+                child: GFCheckbox(
+                  size: GFSize.SMALL,
+                  type: GFCheckboxType.basic,
+                  activeBgColor: MyColor.hijau2,
+                  //activeIcon: const Icon(Icons.check, size: 10, color: GFColors.WHITE),,
+                  onChanged: (value) {
+                    setState(() {
+                      _circulationNadiPalpitasi = value;
+                      print(
+                          'value breathing _circulationNadiPalpitasi  $_circulationNadiPalpitasi ');
+                    });
+                  },
+                  value: _circulationNadiPalpitasi,
+                  inactiveIcon: null,
+                ),
+              )
+            ],
           ),
         ],
       ),

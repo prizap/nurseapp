@@ -40,7 +40,10 @@ class HomePage extends StatelessWidget {
                 //height: 200,
                 //width: 400,
                 //alignment: Alignment.center,
-                child: Lottie.asset('assets/imgs/medical-frontliners.json'),
+                child: Lottie.asset(
+                  'assets/imgs/nurse_animation_man.json',
+                  frameRate: FrameRate.max,
+                ),
                 // child: Text(
                 //   "Login",
                 //   style: TextStyle(

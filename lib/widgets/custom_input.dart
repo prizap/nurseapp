@@ -35,7 +35,10 @@ Widget textFld({
   int? maxLength,
 }) {
   return TextFormField(
-    onChanged: (v) => onChanged!(v),
+    autofocus: false,
+    // focusNode: focus,
+    // onChanged: (v) => onChanged!(v),
+    onEditingComplete: () => onChanged,
     decoration: InputDecoration(
       isDense: true,
       border: const OutlineInputBorder(),
@@ -147,7 +150,7 @@ class _MyCheckBoxState extends State<MyCheckBox> {
               //activeIcon: const Icon(Icons.check, size: 10, color: GFColors.WHITE),,
               //onChanged: _handleTap,
               onChanged: (value) {
-                widget.callback(value!);
+                widget.callback(value);
                 setState(() => widget.active = !widget.active);
               },
               value: widget.active,

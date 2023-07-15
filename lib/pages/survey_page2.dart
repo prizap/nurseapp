@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:getwidget/getwidget.dart';
 import 'package:nurse_application_1/const/xcolors.dart';
+import 'package:nurse_application_1/helper/function_helper.dart';
+import 'package:nurse_application_1/pages/result_page.dart';
 import 'package:nurse_application_1/widgets/mytext.dart';
 
 import '../widgets/custom_input.dart';
@@ -30,6 +32,14 @@ class _SurveyPage2State extends State<SurveyPage2> {
   var _statusMental;
   var _airway;
   var _frekuensiNadi;
+  var _hasilLab;
+  var _hepatojuglar;
+  var _circulationmMmbranMurkosa;
+  var _circulationTurgorKulit;
+  var _urineTrend;
+  var _circulationJVP;
+  var _circulationCVP;
+  // Step Breating
   bool _breathingAda = false;
   bool _breathingNormal = false;
   bool _breathingBatukTidakEfektif = false;
@@ -47,14 +57,350 @@ class _SurveyPage2State extends State<SurveyPage2> {
   bool _breathingSuaraNafasWheeze = false;
   bool _breathingSuaraNafasCreckels = false;
   bool _breathingSuaraNafasAbsent = false;
+  // Step Circulation
   bool _circulationNadiNormal = false;
   bool _circulationNadiTakikardi = false;
   bool _circulationNadiBradikardi = false;
   bool _circulationNadiPalpitasi = false;
   bool _circulationKualitasRegular = false;
   bool _circulationKualitasIrregular = false;
+  bool _circulationKualitasKuat = false;
+  bool _circulationKualitasLemah = false;
+  bool _circulationEdemaAnarsaka = false;
+  bool _circulationEdemaPerifer = false;
+  bool _circulationEdemaLainLain = false;
+  bool _circulationdisetensiVenajugularis = false;
+  bool _circulationKelelahan = false;
+  bool _circulationCRTlebihdari2 = false;
+  bool _circulationKulitNormal = false;
+  bool _circulationKulitLembab = false;
+  bool _circulationKulitJaundice = false;
+  bool _circulationKulitKeringHangat = false;
+  bool _circulationKulitPanas = false;
+  bool _circulationKulitDingin = false;
+  bool _circulationKulitPucat = false;
+  bool _ciculationTesRumpleLeed = false;
+  bool _circulationKulitSianosis = false;
+  // Step Disabilitas
+  bool _disabilitasAlert = false;
+  bool _disabilitasVerbal = false;
+  bool _disabilitasPainful = false;
+  bool _disabilitasUnresponsive = false;
+  // Step Nyeri
+  bool _nyeriAda = false;
+  bool _nyeriMeringis = false;
+  bool _nyeriBersikapProtekti = false;
+  bool _nyeriGelisah = false;
+  bool _nyeriSulitTidur = false;
+  bool _nyeriKualitasTajam = false;
+  bool _nyeriKualitasTumpul = false;
+  bool _nyeriKualitasKram = false;
+  bool _nyeriKualitasTerbakar = false;
+  bool _nyeriKualitasTertekan = false;
+  bool _nyeriKualitasDiremas = false;
+  bool _nyeriKualitasTertusuk = false;
+  bool _nyeriKualitasKolik = false;
+  bool _nyeriKualitasHilangTimbul = false;
+  bool _nyeriKualitasMenetap = false;
+  bool _nyeriWaktuPelan = false;
+  bool _nyeriWaktuTibaTiba = false;
+  bool _nyeriWaktuPernahNyeri = false;
+  bool _nyeriWaktuLama = false;
+  bool _nyeriWaktuSingakt = false;
+  // Step EKG
+  bool _gambaranEKGNormal = false;
+  bool _gambaranEKGAritma = false;
+  bool _gambaranEKGgangguanKonduksi = false;
 
+  String errorMassage = "Mohon cek variable berikut ";
+  double _skalaNyeri = 0;
+  // step data pasien
   var ctrlNoReg = TextEditingController();
+  var ctrltglMRS = TextEditingController();
+  var ctrlnama = TextEditingController();
+  var ctrlTglLahir = TextEditingController();
+  var ctrlUsia = TextEditingController();
+  var ctrlAlamat = TextEditingController();
+  var ctrlAgama = TextEditingController();
+  var ctrlPembayran = TextEditingController();
+  var ctrlWaktuKedatangn = TextEditingController();
+  var ctrlWaktuDiperiksa = TextEditingController();
+  var ctrlTempatKejadian = TextEditingController();
+  var ctrlMekanisme = TextEditingController();
+  // Step Primari Survey
+  var ctrlTD1 = TextEditingController();
+  var ctrlTD2 = TextEditingController();
+  var ctrlHR = TextEditingController();
+  var ctrlRepositoryRate = TextEditingController();
+  var ctrlSaO2 = TextEditingController();
+  var ctrlTemperature = TextEditingController();
+  // Step Airway
+  var ctrlMasalahKeperawatan = TextEditingController();
+  var ctrlTindakan = TextEditingController();
+  // Step Breating
+  var ctrlJelasKanan = TextEditingController();
+  var ctrlJelasKiri = TextEditingController();
+  var ctrlRochiKanan = TextEditingController();
+  var ctrlRochiKiri = TextEditingController();
+  var ctrlWheezeKanan = TextEditingController();
+  var ctrlWheezeKiri = TextEditingController();
+  var ctrlCreckelsKanan = TextEditingController();
+  var ctrlCreckelsKiri = TextEditingController();
+  var ctrlAbsenKanan = TextEditingController();
+  var ctrlAbsenKiri = TextEditingController();
+  var ctrlBreatingMasalahKeperawatan = TextEditingController();
+  var ctrlBreatingTindakan = TextEditingController();
+  // Circulation
+  var ctrlNadi = TextEditingController();
+  var ctrlKehilanganCairan = TextEditingController();
+  var ctrlurineSejamPertama = TextEditingController();
+  var ctrlurineSejamKedua = TextEditingController();
+  var ctrlurineSejamKetiga = TextEditingController();
+  var ctrlMasalahKeperawatanCirculation = TextEditingController();
+  var ctrlTindakanCirculation = TextEditingController();
+  //Step Disabilitas
+  var ctrlLainLainDisabilitas = TextEditingController();
+  //Step Nyeri
+  var ctrlLainLainNyeri = TextEditingController();
+  var ctrlNyeriPemulihan = TextEditingController();
+  var ctrlSliderNyeri = TextEditingController();
+
+  //Step Lab
+  var ctrlHematokrit = TextEditingController();
+
+  @override
+  void initState() {
+    super.initState();
+  }
+
+  @override
+  void dispose() {
+    ctrlNoReg.dispose();
+    ctrltglMRS.dispose();
+    ctrlnama.dispose();
+    ctrlTglLahir.dispose();
+    ctrlUsia.dispose();
+    ctrlAlamat.dispose();
+    ctrlAgama.dispose();
+    ctrlPembayran.dispose();
+    ctrlWaktuKedatangn.dispose();
+    ctrlWaktuDiperiksa.dispose();
+    ctrlTempatKejadian.dispose();
+    ctrlMekanisme.dispose();
+    // Step Primari Survey
+    ctrlTD1.dispose();
+    ctrlTD2.dispose();
+    ctrlHR.dispose();
+    ctrlRepositoryRate.dispose();
+    ctrlSaO2.dispose();
+    ctrlTemperature.dispose();
+    // Step Airway
+    ctrlMasalahKeperawatan.dispose();
+    ctrlTindakan.dispose();
+    // Step Breating
+    ctrlJelasKanan.dispose();
+    ctrlJelasKiri.dispose();
+    ctrlRochiKanan.dispose();
+    ctrlRochiKiri.dispose();
+    ctrlWheezeKanan.dispose();
+    ctrlWheezeKiri.dispose();
+    ctrlCreckelsKanan.dispose();
+    ctrlCreckelsKiri.dispose();
+    ctrlAbsenKanan.dispose();
+    ctrlAbsenKiri.dispose();
+    ctrlBreatingMasalahKeperawatan.dispose();
+    ctrlBreatingTindakan.dispose();
+    // Circulation
+    ctrlNadi.dispose();
+    ctrlKehilanganCairan.dispose();
+    ctrlurineSejamPertama.dispose();
+    ctrlurineSejamKedua.dispose();
+    ctrlurineSejamKetiga.dispose();
+    ctrlMasalahKeperawatanCirculation.dispose();
+    ctrlTindakanCirculation.dispose();
+    //Step Disabilitas
+    ctrlLainLainDisabilitas.dispose();
+    //Step Nyeri
+    ctrlLainLainNyeri.dispose();
+    ctrlNyeriPemulihan.dispose();
+    ctrlSliderNyeri.dispose();
+
+    //Step Lab
+    ctrlHematokrit.dispose();
+    super.dispose();
+  }
+
+  bool checkVar() {
+    //data pasien
+    if (ctrlNoReg.text == "" || ctrlNoReg.text.isEmpty) {
+      errorMassage = "";
+      errorMassage += "Kolom Data Pasien nomor registrasi";
+      return false;
+    }
+    if (ctrltglMRS.text == "" || ctrltglMRS.text.isEmpty) {
+      errorMassage = "";
+      errorMassage += "Kolom Data Pasien Tanggal masuk rumah sakit";
+      return false;
+    }
+    if (ctrlnama.text == "" || ctrlnama.text.isEmpty) {
+      errorMassage = "";
+      errorMassage += "Kolom Data Pasien nama";
+      return false;
+    }
+    if (ctrlTglLahir.text == "" || ctrlTglLahir.text.isEmpty) {
+      errorMassage = "";
+      errorMassage += "Kolom Data Pasien Tanggal Lahir";
+      return false;
+    }
+    if (ctrlUsia.text == "" || ctrlUsia.text.isEmpty) {
+      errorMassage = "";
+      errorMassage += "Kolom Data Pasien Usia";
+      return false;
+    }
+    if (ctrlAlamat.text == "" || ctrlAlamat.text.isEmpty) {
+      errorMassage = "";
+      errorMassage += "Kolom Data Pasien Alamat";
+      return false;
+    }
+    if (ctrlAgama.text == "" || ctrlAgama.text.isEmpty) {
+      errorMassage = "";
+      errorMassage += "Kolom Data Pasien Agama";
+      return false;
+    }
+    if (ctrlPembayran.text == "" || ctrlPembayran.text.isEmpty) {
+      errorMassage = "";
+      errorMassage += "Kolom Data Pasien Pembayaran";
+      return false;
+    }
+    if (ctrlWaktuKedatangn.text == "" || ctrlWaktuKedatangn.text.isEmpty) {
+      errorMassage = "";
+      errorMassage += "Kolom Data Pasien Waktu Kedatangan";
+      return false;
+    }
+    if (_tipeKedatangan == null || _tipeKedatangan == "") {
+      errorMassage = "";
+      errorMassage += "Kolom Data Pasien Tipe Kedatangan";
+      return false;
+    }
+    if (_kecelakaan == null || _kecelakaan == "") {
+      errorMassage = "";
+      errorMassage += "Kolom Data Pasien Tipe Kecelakaan";
+      return false;
+    }
+    if (ctrlWaktuDiperiksa.text == "" || ctrlWaktuDiperiksa.text.isEmpty) {
+      errorMassage = "";
+      errorMassage += "Kolom Data Pasien Waktu Diperiksa";
+      return false;
+    }
+    if (ctrlTempatKejadian.text == "" || ctrlTempatKejadian.text.isEmpty) {
+      errorMassage = "";
+      errorMassage += "Kolom Data Pasien Waktu Tempat Kejadian";
+      return false;
+    }
+    if (ctrlMekanisme.text == "" || ctrlMekanisme.text.isEmpty) {
+      errorMassage = "";
+      errorMassage += "Kolom Data Pasien Mekanisme";
+      return false;
+    }
+    if (_kondisiKedatangan == null || _kondisiKedatangan == "") {
+      errorMassage = "";
+      errorMassage += "Kolom Data Pasien Tipe Kondisi Kedatangan";
+      return false;
+    }
+    if (_diantar == null || _diantar == "") {
+      errorMassage = "";
+      errorMassage += "Kolom Data Pasien Tipe Kondisi Di antar";
+      return false;
+    }
+    if (_informasiDiperoleh == null || _informasiDiperoleh == "") {
+      errorMassage = "";
+      errorMassage += "Kolom Data Pasien Informasi Diperoleh";
+      return false;
+    }
+    if (_kategoriTriase == null || _kategoriTriase == "") {
+      errorMassage = "";
+      errorMassage += "Dropdown Primary Survey Kategori Triase";
+      return false;
+    }
+    if (_beratSekarang == null || _beratSekarang == "") {
+      errorMassage = "";
+      errorMassage += "Dropdown Primary Survey Berat Badan Mohon Diisi";
+      return false;
+    }
+    if (_td1 == null || _td1 == "") {
+      errorMassage = "";
+      errorMassage += "Dropdown Primary Survey TD1  mohon diisi";
+      return false;
+    }
+    if (_td2 == null || _td2 == "") {
+      errorMassage = "";
+      errorMassage += "Dropdown Primary Survey TD2  mohon diisi";
+      return false;
+    }
+    if (_temperature1 == null || _temperature1 == "") {
+      errorMassage = "";
+      errorMassage += "Dropdown Primary Survey Temperature";
+      return false;
+    }
+    if (_temperature2 == null || _temperature2 == "") {
+      errorMassage = "";
+      errorMassage += "Dropdown Primary Survey Temperature  mohon diisi";
+      return false;
+    }
+    if (_statusMental == null || _statusMental == "") {
+      errorMassage = "";
+      errorMassage += "Dropdown Primary Survey Status Mental  mohon diisi";
+      return false;
+    }
+    if (_airway == null || _airway == "") {
+      errorMassage = "";
+      errorMassage += "Dropdown Airway  mohon diisi";
+      return false;
+    }
+    if (_frekuensiNadi == null || _frekuensiNadi == "") {
+      errorMassage = "";
+      errorMassage += "Dropdown Circulation Frekuensi Nadi  mohon diisi";
+      return false;
+    }
+    if (_hasilLab == null || _hasilLab == "") {
+      errorMassage = "";
+      errorMassage += "Dropdown Hasil Lab  mohon diisi";
+      return false;
+    }
+    if (_hepatojuglar == null || _hepatojuglar == "") {
+      errorMassage = "";
+      errorMassage += "Dropdown Circulation Hepato Juglar  mohon diisi";
+      return false;
+    }
+    if (_circulationmMmbranMurkosa == null ||
+        _circulationmMmbranMurkosa == "") {
+      errorMassage = "";
+      errorMassage += "Dropdown Circulation Membran Murkosa  mohon diisi";
+      return false;
+    }
+    if (_circulationTurgorKulit == null || _circulationTurgorKulit == "") {
+      errorMassage = "";
+      errorMassage += "Dropdown Circulation Turgor Kulit  mohon diisi";
+      return false;
+    }
+    if (_urineTrend == null || _urineTrend == "") {
+      errorMassage = "";
+      errorMassage += "Dropdown Circulation Urine Trend  mohon diisi";
+      return false;
+    }
+    if (_circulationJVP == null || _circulationJVP == "") {
+      errorMassage = "";
+      errorMassage += "Dropdown Circulation JVP mohon diisi";
+      return false;
+    }
+    if (_circulationCVP == null || _circulationCVP == "") {
+      errorMassage = "";
+      errorMassage += "Dropdown Circulation CVP mohon diisi";
+      return false;
+    }
+
+    return true;
+  }
 
   // @override
   // void initState() {
@@ -96,17 +442,102 @@ class _SurveyPage2State extends State<SurveyPage2> {
     });
   }
 
+  List<Penyakit> penyakitGet() {
+    return [
+      HipovolemiaD22(
+          bbSekarang: _beratSekarang,
+          pnd: _breathingParoxysmal,
+          edemaAnarsaka: _circulationEdemaAnarsaka,
+          edemaPerifer: _circulationEdemaPerifer,
+          hepatojugular: _hepatojuglar,
+          jvpMeningkat: _circulationJVP,
+          ortopnea: _breathingOrtopnea),
+      HipovolemiaD23(
+          circulationNadi: _circulationNadiTakikardi,
+          circulationKualitasLemah: _circulationKualitasLemah,
+          turun: _td1,
+          menyempit: _td2,
+          nadiTakikardi: _circulationNadiTakikardi,
+          circulationMembranMurkosa: _circulationmMmbranMurkosa,
+          circulationMenurun: _circulationTurgorKulit,
+          hematokrit: ctrlHematokrit.text),
+      HipertemiaD130(temperatureTingg: _temperature1),
+      PenurunanCurahJantung1(
+          gambaranEKGArtimia: _gambaranEKGAritma,
+          gambaranEKGGanguanKodenksi: _gambaranEKGgangguanKonduksi),
+      PenurunanCurahJantung2(
+          cvpMeningkat: _circulationCVP,
+          edemaLainLain: _circulationEdemaLainLain,
+          disetensiVenajugularis: _circulationdisetensiVenajugularis,
+          kelelahan: _circulationKelelahan),
+      PenurunanCurahJantung3(
+          kualitasLemah: _circulationKualitasLemah,
+          crt: _circulationCRTlebihdari2,
+          kulitPucat: _circulationKulitPucat,
+          urineTrend: _urineTrend,
+          dispena: _breathingDispnea),
+      BersihanJalanNafasTidakEfektifD001(
+          tidakmampubatuk: _breathingBatukTidakEfektif,
+          penumpukanSputum: _breathingSputum),
+      PolaNafasTidakEfektifD0005(
+          dispnea: _breathingDispnea,
+          frekuensiEkspirasimemanjang: _breathingFrekuensiEkspirasi,
+          jelasBersih: _breathingSuaraNafasJelas,
+          penggunaanOtotbantuNafas: _breathingOtotBantuNafas,
+          polanafasAbnormalmisTakipnea: _breathingNafasAbnormalTakipnea,
+          polanafasAbnormalmisBradipnea: _breathingNafasAbnormalBradipnea,
+          polanafasAbnormalmishiperventilasi:
+              _breathingNafasAbnormalHiperventilasiKussmaul,
+          ronchi: _breathingSuaraNafasRonchi,
+          wheeze: _breathingSuaraNafasWheeze),
+      NyeriAkut0007(
+          frekuensiNadimeningkat: _frekuensiNadi,
+          nyeriAda: _nyeriAda,
+          nyeriAdaBersikapProtektif: _nyeriBersikapProtekti,
+          nyeriAdaGelisah: _nyeriGelisah,
+          nyeriAdaTampakMeringis: _nyeriMeringis,
+          nyeriSulitTidur: _nyeriSulitTidur),
+      PerfusiperifertidakefektifD0009(
+          crtlebihduadetik: _circulationCRTlebihdari2,
+          dingin: _circulationKulitDingin,
+          kualitaslemah: _circulationKualitasLemah,
+          pucat: _circulationKulitPucat,
+          turgorkulitmenurun: _circulationTurgorKulit),
+    ];
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       floatingActionButton: FloatingActionButton.extended(
         onPressed: () async {
-          ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-              content: MyTextRegular(
-            teks: 'Belum ada implementasi',
-            size: 15,
-            warna: Colors.yellowAccent,
-          )));
+          if (checkVar()) {
+            setState(
+              () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                      builder: (context) => ResultPage(
+                            penyakit: penyakitGet(),
+                            name: ctrlnama.text,
+                            alamat: ctrlAlamat.text,
+                            nomorreg: ctrlNoReg.text,
+                            umur: ctrlUsia.text,
+                          )),
+                );
+              },
+            );
+          } else {
+            ScaffoldMessenger.of(context).showSnackBar(
+              SnackBar(
+                content: MyTextRegular(
+                  teks: errorMassage,
+                  size: 15,
+                  warna: Colors.yellowAccent,
+                ),
+              ),
+            );
+          }
           return;
         },
         icon: const Icon(FontAwesomeIcons.play),
@@ -144,6 +575,33 @@ class _SurveyPage2State extends State<SurveyPage2> {
               onStepContinue: () {
                 bool isLastStep = (currentStep == getSteps().length - 1);
                 if (isLastStep) {
+                  if (checkVar()) {
+                    setState(
+                      () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => ResultPage(
+                                    penyakit: penyakitGet(),
+                                    name: ctrlnama.text,
+                                    alamat: ctrlAlamat.text,
+                                    nomorreg: ctrlNoReg.text,
+                                    umur: ctrlUsia.text,
+                                  )),
+                        );
+                      },
+                    );
+                  } else {
+                    ScaffoldMessenger.of(context).showSnackBar(
+                      SnackBar(
+                        content: MyTextRegular(
+                          teks: errorMassage,
+                          size: 15,
+                          warna: Colors.yellowAccent,
+                        ),
+                      ),
+                    );
+                  }
                   //Do something with this information
                 } else {
                   setState(() {
@@ -169,7 +627,140 @@ class _SurveyPage2State extends State<SurveyPage2> {
       buildCirculation(),
       buildDisabilities(),
       buildNyeri(),
+      buildGambaranEKG(),
+      buildHasilLab(),
     ];
+  }
+
+  Step buildHasilLab() {
+    return Step(
+        state: currentStep > 7 ? StepState.complete : StepState.indexed,
+        isActive: currentStep >= 7,
+        title: const Text("Hasil labolatorium"),
+        subtitle: MyTextRegular(
+          size: 10,
+          warna: Colors.black54,
+          teks: 'Isian Hasil Lab Pasien',
+        ),
+        content: Column(children: [
+          MyTextSemiBold(size: 12, teks: 'Hematokrit'),
+          textFld(
+              ctrl: ctrlHematokrit,
+              txt: 'Hematokrit',
+              onChanged: (value) {
+                ctrlHematokrit.text = value;
+              }),
+          buildHasilLabBox(),
+        ]));
+  }
+
+  Widget buildHasilLabBox() {
+    return Container(
+      //color: Colors.white70,
+      height: 60,
+      width: MediaQuery.of(context).size.width,
+      margin: const EdgeInsets.all(5),
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        children: [
+          MyTextRegular(
+            size: 12,
+            teks: 'Hasil Labolatorium',
+            warna: Colors.black87,
+          ),
+          DropdownButtonHideUnderline(
+            child: GFDropdown(
+              isExpanded: true,
+              padding: const EdgeInsets.all(10),
+              borderRadius: BorderRadius.circular(5),
+              border: const BorderSide(color: Colors.black12, width: 1),
+              dropdownButtonColor: Colors.white,
+              value: _hasilLab,
+              onChanged: (newValue) {
+                setState(() {
+                  _hasilLab = newValue.toString();
+                });
+              },
+              items: [
+                'Meningkat',
+                'Normal',
+                'Menurun',
+              ]
+                  .map((value) => DropdownMenuItem(
+                        value: value,
+                        child: MyTextRegular(
+                          size: 12,
+                          warna: Colors.black87,
+                          teks: value,
+                        ),
+                      ))
+                  .toList(),
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+
+  Step buildGambaranEKG() {
+    return Step(
+        state: currentStep > 7 ? StepState.complete : StepState.indexed,
+        isActive: currentStep >= 7,
+        title: const Text("Gambaran EKG"),
+        subtitle: MyTextRegular(
+          size: 10,
+          warna: Colors.black54,
+          teks: 'Isian Gambaran EKG Pasien',
+        ),
+        content: Column(children: [
+          buildGambaranEKGBox(),
+        ]));
+  }
+
+  GFCard buildGambaranEKGBox() {
+    return GFCard(
+      margin: const EdgeInsets.all(1),
+      padding: const EdgeInsets.symmetric(horizontal: 5, vertical: 5),
+      content: Column(
+        children: [
+          MyTextSemiBold(
+            size: 15,
+            teks: 'Kualitas',
+            warna: Colors.black87,
+          ),
+          checkboxCard(
+              text: 'Normal',
+              choice: _gambaranEKGNormal,
+              onChanged: (value) {
+                setState(
+                  () {
+                    _gambaranEKGNormal = value;
+                  },
+                );
+              }),
+          checkboxCard(
+              text: 'Aritma',
+              choice: _gambaranEKGAritma,
+              onChanged: (value) {
+                setState(
+                  () {
+                    _gambaranEKGAritma = value;
+                  },
+                );
+              }),
+          checkboxCard(
+              text: 'Gangguan konduksi',
+              choice: _gambaranEKGgangguanKonduksi,
+              onChanged: (value) {
+                setState(
+                  () {
+                    _gambaranEKGgangguanKonduksi = value;
+                  },
+                );
+              }),
+        ],
+      ),
+    );
   }
 
   Step buildNyeri() {
@@ -177,15 +768,333 @@ class _SurveyPage2State extends State<SurveyPage2> {
       state: currentStep > 6 ? StepState.complete : StepState.indexed,
       isActive: currentStep >= 6,
       title: const Text("Nyeri"),
-      content: const Column(
+      subtitle: MyTextRegular(
+        size: 10,
+        warna: Colors.black54,
+        teks: 'Isian Nyeri yang dirasakan Pasien',
+      ),
+      content: Column(
         children: [
-          CustomInput(
-            hint: "Bio",
-            inputBorder: OutlineInputBorder(),
-          ),
+          nyeriAdaTidak(),
+          textFld(
+              ctrl: ctrlNyeriPemulihan,
+              txt: 'Penyebab/pemulihan',
+              onChanged: (value) {
+                ctrlNyeriPemulihan.text = value;
+              }),
+          buildSlidderNyeri(),
+          textFld(
+              ctrl: ctrlSliderNyeri,
+              txt: 'Menyebar Ke',
+              onChanged: (value) {
+                ctrlSliderNyeri.text = value;
+              }),
+          buildNyeriKualitas(),
+          buildNyeriWaktu(),
+          textFld(
+              ctrl: ctrlLainLainNyeri,
+              txt: 'Lain-Lain',
+              onChanged: (value) {
+                ctrlLainLainNyeri.text = value;
+              }),
         ],
       ),
     );
+  }
+
+  GFCard buildNyeriKualitas() {
+    return GFCard(
+      margin: const EdgeInsets.all(1),
+      padding: const EdgeInsets.symmetric(horizontal: 5, vertical: 5),
+      content: Column(
+        children: [
+          MyTextSemiBold(
+            size: 15,
+            teks: 'Kualitas',
+            warna: Colors.black87,
+          ),
+          checkboxCard(
+              text: 'Tajam',
+              choice: _nyeriKualitasTajam,
+              onChanged: (value) {
+                setState(
+                  () {
+                    _nyeriKualitasTajam = value;
+                  },
+                );
+              }),
+          checkboxCard(
+              text: 'Tumpul',
+              choice: _nyeriKualitasTumpul,
+              onChanged: (value) {
+                setState(
+                  () {
+                    _nyeriKualitasTumpul = value;
+                  },
+                );
+              }),
+          checkboxCard(
+              text: 'Kram',
+              choice: _nyeriKualitasKram,
+              onChanged: (value) {
+                setState(
+                  () {
+                    _nyeriKualitasKram = value;
+                  },
+                );
+              }),
+          checkboxCard(
+              text: 'Terbakar',
+              choice: _nyeriKualitasTerbakar,
+              onChanged: (value) {
+                setState(
+                  () {
+                    _nyeriKualitasTerbakar = value;
+                  },
+                );
+              }),
+          checkboxCard(
+              text: 'Tertekan',
+              choice: _nyeriKualitasTertekan,
+              onChanged: (value) {
+                setState(
+                  () {
+                    _nyeriKualitasTertekan = value;
+                  },
+                );
+              }),
+          checkboxCard(
+              text: 'Diremas',
+              choice: _nyeriKualitasDiremas,
+              onChanged: (value) {
+                setState(
+                  () {
+                    _nyeriKualitasDiremas = value;
+                  },
+                );
+              }),
+          checkboxCard(
+              text: 'Tertusuk',
+              choice: _nyeriKualitasTertusuk,
+              onChanged: (value) {
+                setState(
+                  () {
+                    _nyeriKualitasTertusuk = value;
+                  },
+                );
+              }),
+          checkboxCard(
+              text: 'Kolik',
+              choice: _nyeriKualitasKolik,
+              onChanged: (value) {
+                setState(
+                  () {
+                    _nyeriKualitasKolik = value;
+                  },
+                );
+              }),
+          checkboxCard(
+              text: 'Hilang timbul',
+              choice: _nyeriKualitasHilangTimbul,
+              onChanged: (value) {
+                setState(
+                  () {
+                    _nyeriKualitasHilangTimbul = value;
+                  },
+                );
+              }),
+          checkboxCard(
+              text: 'Menetap',
+              choice: _nyeriKualitasMenetap,
+              onChanged: (value) {
+                setState(
+                  () {
+                    _nyeriKualitasMenetap = value;
+                  },
+                );
+              }),
+        ],
+      ),
+    );
+  }
+
+  GFCard buildNyeriWaktu() {
+    return GFCard(
+      margin: const EdgeInsets.all(1),
+      padding: const EdgeInsets.symmetric(horizontal: 5, vertical: 5),
+      content: Column(
+        children: [
+          MyTextSemiBold(
+            size: 15,
+            teks: 'Waktu nyeri ',
+            warna: Colors.black87,
+          ),
+          checkboxCard(
+              text: 'Pelan',
+              choice: _nyeriWaktuPelan,
+              onChanged: (value) {
+                setState(
+                  () {
+                    _nyeriWaktuPelan = value;
+                  },
+                );
+              }),
+          checkboxCard(
+              text: 'Tiba-tiba',
+              choice: _nyeriWaktuTibaTiba,
+              onChanged: (value) {
+                setState(
+                  () {
+                    _nyeriWaktuTibaTiba = value;
+                  },
+                );
+              }),
+          checkboxCard(
+              text: 'Pernah nyeri perti ini',
+              choice: _nyeriWaktuPernahNyeri,
+              onChanged: (value) {
+                setState(
+                  () {
+                    _nyeriWaktuPernahNyeri = value;
+                  },
+                );
+              }),
+          checkboxCard(
+              text: 'Lama',
+              choice: _nyeriWaktuLama,
+              onChanged: (value) {
+                setState(
+                  () {
+                    _nyeriWaktuLama = value;
+                  },
+                );
+              }),
+          checkboxCard(
+              text: 'Singkat',
+              choice: _nyeriWaktuSingakt,
+              onChanged: (value) {
+                setState(
+                  () {
+                    _nyeriWaktuSingakt = value;
+                  },
+                );
+              }),
+        ],
+      ),
+    );
+  }
+
+  GFCard nyeriAdaTidak() {
+    return GFCard(
+      margin: const EdgeInsets.all(1),
+      padding: const EdgeInsets.symmetric(horizontal: 5, vertical: 5),
+      content: Column(
+        children: [
+          MyTextSemiBold(
+            size: 15,
+            teks: 'Nyeri',
+            warna: Colors.black87,
+          ),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              Flexible(
+                child: MyTextRegular(
+                  size: 12,
+                  warna: Colors.black87,
+                  teks: 'Ada/Tidak',
+                ),
+              ),
+              Flexible(
+                child: GFCheckbox(
+                  size: GFSize.SMALL,
+                  type: GFCheckboxType.square,
+                  activeBgColor: MyColor.hijau2,
+                  //activeIcon: const Icon(Icons.check, size: 10, color: GFColors.WHITE),,
+                  onChanged: (value) {
+                    setState(() {
+                      _nyeriAda = value;
+                      print('value breathing _breathingOrtopnea $_nyeriAda');
+                    });
+                  },
+                  value: _nyeriAda,
+                  inactiveIcon: null,
+                ),
+              )
+            ],
+          ),
+          const SizedBox(
+            height: 5,
+          ),
+          checkboxCard(
+              text: 'Tampak Meringis',
+              choice: _nyeriMeringis,
+              onChanged: (value) {
+                setState(
+                  () {
+                    _nyeriMeringis = value;
+                  },
+                );
+              }),
+          checkboxCard(
+              text: 'Bersikap protektif',
+              choice: _nyeriBersikapProtekti,
+              onChanged: (value) {
+                setState(
+                  () {
+                    _nyeriBersikapProtekti = value;
+                  },
+                );
+              }),
+          checkboxCard(
+              text: 'Gelisah',
+              choice: _nyeriGelisah,
+              onChanged: (value) {
+                setState(
+                  () {
+                    _nyeriGelisah = value;
+                  },
+                );
+              }),
+          checkboxCard(
+              text: 'Sulit Tidur',
+              choice: _nyeriSulitTidur,
+              onChanged: (value) {
+                setState(
+                  () {
+                    _nyeriSulitTidur = value;
+                  },
+                );
+              }),
+        ],
+      ),
+    );
+  }
+
+  GFCard buildSlidderNyeri() {
+    return GFCard(
+        content: Column(
+      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+      children: <Widget>[
+        MyTextRegular(
+          size: 15,
+          teks: 'Skala Nyeri',
+          warna: Colors.black87,
+        ),
+        SliderTheme(
+          data: const SliderThemeData(
+              showValueIndicator: ShowValueIndicator.onlyForContinuous),
+          child: Slider(
+              value: _skalaNyeri,
+              onChanged: (value) {
+                setState(() => _skalaNyeri = value);
+              },
+              min: 0,
+              max: 10,
+              label: _skalaNyeri.round().toString()),
+        )
+      ],
+    ));
   }
 
   Step buildDisabilities() {
@@ -193,12 +1102,76 @@ class _SurveyPage2State extends State<SurveyPage2> {
       state: currentStep > 5 ? StepState.complete : StepState.indexed,
       isActive: currentStep >= 5,
       title: const Text("Disabilities"),
-      content: const Column(
+      subtitle: MyTextRegular(
+        size: 10,
+        warna: Colors.black54,
+        teks: 'Isian Disabilitas Pasien',
+      ),
+      content: Column(
         children: [
-          CustomInput(
-            hint: "Bio",
-            inputBorder: OutlineInputBorder(),
+          buildDisabilitasBox(),
+        ],
+      ),
+    );
+  }
+
+  GFCard buildDisabilitasBox() {
+    return GFCard(
+      margin: const EdgeInsets.all(1),
+      padding: const EdgeInsets.symmetric(horizontal: 5, vertical: 5),
+      content: Column(
+        children: [
+          MyTextSemiBold(
+            size: 15,
+            teks: 'Disabilitas',
+            warna: Colors.black87,
           ),
+          checkboxCard(
+              text: 'Alert',
+              choice: _disabilitasAlert,
+              onChanged: (value) {
+                setState(
+                  () {
+                    _disabilitasAlert = value;
+                  },
+                );
+              }),
+          checkboxCard(
+              text: 'Verbal',
+              choice: _disabilitasVerbal,
+              onChanged: (value) {
+                setState(
+                  () {
+                    _disabilitasVerbal = value;
+                  },
+                );
+              }),
+          checkboxCard(
+              text: 'Painful',
+              choice: _disabilitasPainful,
+              onChanged: (value) {
+                setState(
+                  () {
+                    _disabilitasPainful = value;
+                  },
+                );
+              }),
+          checkboxCard(
+              text: 'Unresponsive',
+              choice: _disabilitasUnresponsive,
+              onChanged: (value) {
+                setState(
+                  () {
+                    _disabilitasUnresponsive = value;
+                  },
+                );
+              }),
+          textFld(
+              ctrl: ctrlLainLainDisabilitas,
+              txt: 'Lain-Lain',
+              onChanged: (value) {
+                ctrlLainLainDisabilitas.text = value;
+              }),
         ],
       ),
     );
@@ -209,25 +1182,770 @@ class _SurveyPage2State extends State<SurveyPage2> {
       state: currentStep > 4 ? StepState.complete : StepState.indexed,
       isActive: currentStep >= 4,
       title: const Text("Circulation"),
+      subtitle: MyTextRegular(
+        size: 10,
+        warna: Colors.black54,
+        teks: 'Isian Circulation Pasien',
+      ),
       content: Column(
         children: [
-          GFCard(
-            content: Column(
-              children: [
-                MyTextSemiBold(size: 12, teks: 'Nadi'),
-                textFld(ctrl: ctrlNoReg, txt: 'Nadi (x/Menit)'),
-                buildFrekuensiNadi(),
-                circulationNadiNormal(),
-                circulationNadiTakikardi(),
-                circulationNadiBradikardi(),
-                circulationNadiPalpitasi(),
-                MyTextSemiBold(size: 12, teks: 'Kualitas'),
-                circulationKualitasRegular(),
-                circulationKualitasIrregular(),
-                //MyCheckBox(onChanged: _handleCheckBox, label: 'Normal')
-                //myCheckBox(teks: 'Normal', xvalue: _circulationNadiNormal, ),
-              ],
+          // GFCard(
+          //   content: Column(
+          //     children: [
+          circulationKualitasText(text: 'Kualitas'),
+          textFld(
+              ctrl: ctrlNadi,
+              txt: 'Nadi (x/Menit)',
+              onChanged: (value) {
+                ctrlNadi.text = value;
+              }),
+          buildFrekuensiNadi(),
+          circulationNadiNormal(),
+          circulationNadiTakikardi(),
+          circulationNadiBradikardi(),
+          circulationNadiPalpitasi(),
+          circulationKulitas(),
+          circulationCRT(),
+          circulationKulit(),
+          circulationTestRumpleLeed(),
+          circulationMembranMurkosa(),
+          circulationTurogorkulit(),
+          textFld(
+              ctrl: ctrlKehilanganCairan,
+              txt: 'Perkiraan kehilangan cairan ml',
+              onChanged: (value) {
+                ctrlKehilanganCairan.text = value;
+              }),
+          circulationEdema(),
+          circulationOutputUrine(),
+          circulationJVP(),
+          circulationCVP(),
+          circulationReflekshepatojugular(),
+          circulationDistensivenajugularis(),
+          circulationKelelahan(),
+
+          //MyCheckBox(onChanged: _handleCheckBox, label: 'Normal')
+          //myCheckBox(teks: 'Normal', xvalue: _circulationNadiNormal, ),
+        ],
+      ),
+      //     ),
+      //   ],
+      // ),
+    );
+  }
+
+  GFCard circulationKelelahan() {
+    return GFCard(
+      margin: const EdgeInsets.all(1),
+      padding: const EdgeInsets.symmetric(horizontal: 5, vertical: 5),
+      content: Column(
+        children: [
+          MyTextSemiBold(
+            size: 15,
+            teks: 'Kelelahan',
+            warna: Colors.black87,
+          ),
+          checkboxCard(
+              text: 'Positive',
+              choice: _circulationKelelahan,
+              onChanged: (value) {
+                setState(
+                  () {
+                    _circulationKelelahan = value;
+                  },
+                );
+              }),
+        ],
+      ),
+    );
+  }
+
+  GFCard circulationDistensivenajugularis() {
+    return GFCard(
+      margin: const EdgeInsets.all(1),
+      padding: const EdgeInsets.symmetric(horizontal: 5, vertical: 5),
+      content: Column(
+        children: [
+          MyTextSemiBold(
+            size: 15,
+            teks: 'Distensi vena jugularis ',
+            warna: Colors.black87,
+          ),
+          checkboxCard(
+              text: 'Positive',
+              choice: _circulationdisetensiVenajugularis,
+              onChanged: (value) {
+                setState(
+                  () {
+                    _circulationdisetensiVenajugularis = value;
+                  },
+                );
+              }),
+        ],
+      ),
+    );
+  }
+
+  Widget circulationReflekshepatojugular() {
+    return Container(
+      //color: Colors.white70,
+      height: 60,
+      width: MediaQuery.of(context).size.width,
+      margin: const EdgeInsets.all(5),
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        children: [
+          MyTextRegular(
+            size: 12,
+            teks: 'Refleks hepatojugular',
+            warna: Colors.black87,
+          ),
+          DropdownButtonHideUnderline(
+            child: GFDropdown(
+              isExpanded: true,
+              padding: const EdgeInsets.all(10),
+              borderRadius: BorderRadius.circular(5),
+              border: const BorderSide(color: Colors.black12, width: 1),
+              dropdownButtonColor: Colors.white,
+              value: _hepatojuglar,
+              onChanged: (newValue) {
+                setState(() {
+                  _hepatojuglar = newValue.toString();
+                });
+              },
+              items: [
+                'Positive',
+                'Normal',
+              ]
+                  .map((value) => DropdownMenuItem(
+                        value: value,
+                        child: MyTextRegular(
+                          size: 12,
+                          warna: Colors.black87,
+                          teks: value,
+                        ),
+                      ))
+                  .toList(),
             ),
+          ),
+        ],
+      ),
+    );
+  }
+
+  GFCard circulationCVP() {
+    return GFCard(
+      margin: const EdgeInsets.all(1),
+      padding: const EdgeInsets.symmetric(horizontal: 5, vertical: 5),
+      content: Column(
+        children: [
+          MyTextSemiBold(
+            size: 15,
+            teks: 'Cental Venous Pressure',
+            warna: Colors.black87,
+          ),
+          DropdownButtonHideUnderline(
+            child: GFDropdown(
+              isExpanded: true,
+              padding: const EdgeInsets.all(10),
+              borderRadius: BorderRadius.circular(5),
+              border: const BorderSide(color: Colors.black12, width: 1),
+              dropdownButtonColor: Colors.white,
+              value: _circulationCVP,
+              onChanged: (newValue) {
+                setState(() {
+                  _circulationCVP = newValue.toString();
+                });
+              },
+              items: [
+                'Meningkat',
+                'Normal',
+                'Menurun',
+              ]
+                  .map((value) => DropdownMenuItem(
+                        value: value,
+                        child: MyTextRegular(
+                          size: 12,
+                          warna: Colors.black87,
+                          teks: value,
+                        ),
+                      ))
+                  .toList(),
+            ),
+          )
+        ],
+      ),
+    );
+  }
+
+  GFCard circulationJVP() {
+    return GFCard(
+      margin: const EdgeInsets.all(1),
+      padding: const EdgeInsets.symmetric(horizontal: 5, vertical: 5),
+      content: Column(
+        children: [
+          MyTextSemiBold(
+            size: 15,
+            teks: 'Jugular Venous Pressure ',
+            warna: Colors.black87,
+          ),
+          DropdownButtonHideUnderline(
+            child: GFDropdown(
+              isExpanded: true,
+              padding: const EdgeInsets.all(10),
+              borderRadius: BorderRadius.circular(5),
+              border: const BorderSide(color: Colors.black12, width: 1),
+              dropdownButtonColor: Colors.white,
+              value: _circulationJVP,
+              onChanged: (newValue) {
+                setState(() {
+                  _circulationJVP = newValue.toString();
+                });
+              },
+              items: [
+                'Meningkat',
+                'Normal',
+                'Menurun',
+              ]
+                  .map((value) => DropdownMenuItem(
+                        value: value,
+                        child: MyTextRegular(
+                          size: 12,
+                          warna: Colors.black87,
+                          teks: value,
+                        ),
+                      ))
+                  .toList(),
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+
+  GFCard circulationOutputUrine() {
+    return GFCard(
+      margin: const EdgeInsets.all(1),
+      padding: const EdgeInsets.symmetric(horizontal: 5, vertical: 5),
+      content: Column(
+        children: [
+          MyTextSemiBold(
+            size: 15,
+            teks: 'Output urine',
+            warna: Colors.black87,
+          ),
+          Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: textFld(
+                ctrl: ctrlurineSejamPertama,
+                txt: 'Satu jam pertama...ml',
+                onChanged: (value) {
+                  ctrlurineSejamPertama.text = value;
+                }),
+          ),
+          Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: textFld(
+                ctrl: ctrlurineSejamKedua,
+                txt: 'Satu jam kedua...ml',
+                onChanged: (value) {
+                  ctrlurineSejamKedua.text = value;
+                }),
+          ),
+          Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: textFld(
+                ctrl: ctrlurineSejamKetiga,
+                txt: 'Satu jam ketiga...ml',
+                onChanged: (value) {
+                  ctrlurineSejamKetiga.text = value;
+                }),
+          ),
+          Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: DropdownButtonHideUnderline(
+              child: GFDropdown(
+                isExpanded: true,
+                padding: const EdgeInsets.all(10),
+                borderRadius: BorderRadius.circular(5),
+                border: const BorderSide(color: Colors.black12, width: 1),
+                dropdownButtonColor: Colors.white,
+                value: _urineTrend,
+                onChanged: (newValue) {
+                  setState(() {
+                    _urineTrend = newValue.toString();
+                  });
+                },
+                items: [
+                  'Normal',
+                  'Menurun',
+                ]
+                    .map((value) => DropdownMenuItem(
+                          value: value,
+                          child: MyTextRegular(
+                            size: 12,
+                            warna: Colors.black87,
+                            teks: value,
+                          ),
+                        ))
+                    .toList(),
+              ),
+            ),
+          ),
+          Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: textFld(
+                ctrl: ctrlMasalahKeperawatan,
+                txt: 'Masalah keperawatan',
+                onChanged: (value) {
+                  ctrlMasalahKeperawatan.text = value;
+                }),
+          ),
+          Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: textFld(
+                ctrl: ctrlTindakanCirculation,
+                txt: 'Tindakan',
+                onChanged: (value) {
+                  ctrlTindakanCirculation.text = value;
+                }),
+          ),
+        ],
+      ),
+    );
+  }
+
+  GFCard circulationEdema() {
+    return GFCard(
+      margin: const EdgeInsets.all(1),
+      padding: const EdgeInsets.symmetric(horizontal: 5, vertical: 5),
+      content: Column(
+        children: [
+          MyTextSemiBold(
+            size: 15,
+            teks: 'Kulit',
+            warna: Colors.black87,
+          ),
+          checkboxCard(
+              text: 'Edema Anarsaka',
+              choice: _circulationEdemaAnarsaka,
+              onChanged: (value) {
+                setState(
+                  () {
+                    _circulationEdemaAnarsaka = value;
+                  },
+                );
+              }),
+          checkboxCard(
+              text: 'Edema perifer',
+              choice: _circulationEdemaPerifer,
+              onChanged: (value) {
+                setState(
+                  () {
+                    _circulationEdemaPerifer = value;
+                  },
+                );
+              }),
+          checkboxCard(
+              text: 'Edema lain-lain',
+              choice: _circulationEdemaLainLain,
+              onChanged: (value) {
+                setState(
+                  () {
+                    _circulationEdemaLainLain = value;
+                  },
+                );
+              }),
+        ],
+      ),
+    );
+  }
+
+  Widget circulationTurogorkulit() {
+    return Container(
+      //color: Colors.white70,
+      height: 60,
+      width: MediaQuery.of(context).size.width,
+      margin: const EdgeInsets.all(5),
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        children: [
+          MyTextRegular(
+            size: 12,
+            teks: 'Turogor Kulit',
+            warna: Colors.black87,
+          ),
+          DropdownButtonHideUnderline(
+            child: GFDropdown(
+              isExpanded: true,
+              padding: const EdgeInsets.all(10),
+              borderRadius: BorderRadius.circular(5),
+              border: const BorderSide(color: Colors.black12, width: 1),
+              dropdownButtonColor: Colors.white,
+              value: _circulationTurgorKulit,
+              onChanged: (newValue) {
+                setState(() {
+                  _circulationTurgorKulit = newValue.toString();
+                });
+              },
+              items: [
+                'Normal',
+                'Menurun',
+              ]
+                  .map((value) => DropdownMenuItem(
+                        value: value,
+                        child: MyTextRegular(
+                          size: 12,
+                          warna: Colors.black87,
+                          teks: value,
+                        ),
+                      ))
+                  .toList(),
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+
+  Widget circulationMembranMurkosa() {
+    return Container(
+      //color: Colors.white70,
+      height: 60,
+      width: MediaQuery.of(context).size.width,
+      margin: const EdgeInsets.all(5),
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        children: [
+          MyTextRegular(
+            size: 12,
+            teks: 'Membran Murkosa',
+            warna: Colors.black87,
+          ),
+          DropdownButtonHideUnderline(
+            child: GFDropdown(
+              isExpanded: true,
+              padding: const EdgeInsets.all(10),
+              borderRadius: BorderRadius.circular(5),
+              border: const BorderSide(color: Colors.black12, width: 1),
+              dropdownButtonColor: Colors.white,
+              value: _circulationmMmbranMurkosa,
+              onChanged: (newValue) {
+                setState(() {
+                  _circulationmMmbranMurkosa = newValue.toString();
+                });
+              },
+              items: [
+                'Kering',
+                'Lembab',
+              ]
+                  .map((value) => DropdownMenuItem(
+                        value: value,
+                        child: MyTextRegular(
+                          size: 12,
+                          warna: Colors.black87,
+                          teks: value,
+                        ),
+                      ))
+                  .toList(),
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+
+  GFCard circulationTestRumpleLeed() {
+    return GFCard(
+      margin: const EdgeInsets.all(1),
+      padding: const EdgeInsets.symmetric(horizontal: 5, vertical: 5),
+      content: Column(
+        children: [
+          MyTextSemiBold(
+            size: 15,
+            teks: 'Test Rumple Leed',
+            warna: Colors.black87,
+          ),
+          checkboxCard(
+            text: 'Positive/Negative',
+            choice: _ciculationTesRumpleLeed,
+            onChanged: (value) {
+              setState(
+                () {
+                  _ciculationTesRumpleLeed = value;
+                },
+              );
+            },
+          ),
+        ],
+      ),
+    );
+  }
+
+  GFCard circulationKulit() {
+    return GFCard(
+      margin: const EdgeInsets.all(1),
+      padding: const EdgeInsets.symmetric(horizontal: 5, vertical: 5),
+      content: Column(
+        children: [
+          MyTextSemiBold(
+            size: 15,
+            teks: 'Kulit',
+            warna: Colors.black87,
+          ),
+          checkboxCard(
+            text: 'Normal',
+            choice: _circulationKulitNormal,
+            onChanged: (value) {
+              setState(
+                () {
+                  _circulationKulitNormal = value;
+                },
+              );
+            },
+          ),
+          checkboxCard(
+            text: 'Lembab',
+            choice: _circulationKulitLembab,
+            onChanged: (value) {
+              setState(
+                () {
+                  _circulationKulitLembab = value;
+                },
+              );
+            },
+          ),
+          checkboxCard(
+            text: 'Jaundice',
+            choice: _circulationKulitJaundice,
+            onChanged: (value) {
+              setState(
+                () {
+                  _circulationKulitJaundice = value;
+                },
+              );
+            },
+          ),
+          checkboxCard(
+            text: 'Kering/hangat',
+            choice: _circulationKulitKeringHangat,
+            onChanged: (value) {
+              setState(
+                () {
+                  _circulationKulitKeringHangat = value;
+                },
+              );
+            },
+          ),
+          checkboxCard(
+            text: 'Panas',
+            choice: _circulationKulitPanas,
+            onChanged: (value) {
+              setState(
+                () {
+                  _circulationKulitPanas = value;
+                },
+              );
+            },
+          ),
+          checkboxCard(
+            text: 'Dingin',
+            choice: _circulationKulitDingin,
+            onChanged: (value) {
+              setState(
+                () {
+                  _circulationKulitDingin = value;
+                },
+              );
+            },
+          ),
+          checkboxCard(
+            text: 'Pucat',
+            choice: _circulationKulitPucat,
+            onChanged: (value) {
+              setState(
+                () {
+                  _circulationKulitPucat = value;
+                },
+              );
+            },
+          ),
+          checkboxCard(
+            text: 'Sianosis',
+            choice: _circulationKulitSianosis,
+            onChanged: (value) {
+              setState(
+                () {
+                  _circulationKulitSianosis = value;
+                },
+              );
+            },
+          ),
+        ],
+      ),
+    );
+  }
+
+  GFCard circulationCRT() {
+    return GFCard(
+      margin: const EdgeInsets.all(1),
+      padding: const EdgeInsets.symmetric(horizontal: 5, vertical: 5),
+      content: Column(
+        children: [
+          MyTextSemiBold(
+            size: 15,
+            teks: 'CRT',
+            warna: Colors.black87,
+          ),
+          checkboxCard(
+            text: 'Lebih dari 2 detik',
+            choice: _circulationCRTlebihdari2,
+            onChanged: (value) {
+              setState(
+                () {
+                  _circulationCRTlebihdari2 = value;
+                },
+              );
+            },
+          ),
+        ],
+      ),
+    );
+  }
+
+  GFCard circulationKulitas() {
+    return GFCard(
+        margin: const EdgeInsets.all(1),
+        padding: const EdgeInsets.symmetric(horizontal: 5, vertical: 5),
+        content: Column(
+          children: [
+            MyTextSemiBold(
+              size: 15,
+              teks: 'Kualitas',
+              warna: Colors.black87,
+            ),
+            checkboxCard(
+              text: 'Regular',
+              choice: _circulationKualitasRegular,
+              onChanged: (value) {
+                setState(
+                  () {
+                    _circulationKualitasRegular = value;
+                  },
+                );
+              },
+            ),
+            checkboxCard(
+              text: 'Irregular',
+              choice: _circulationKualitasIrregular,
+              onChanged: (value) {
+                setState(
+                  () {
+                    _circulationKualitasIrregular = value;
+                  },
+                );
+              },
+            ),
+            checkboxCard(
+              text: 'kuat',
+              choice: _circulationKualitasKuat,
+              onChanged: (value) {
+                setState(
+                  () {
+                    _circulationKualitasKuat = value;
+                  },
+                );
+              },
+            ),
+            checkboxCard(
+              text: 'Lemah',
+              choice: _circulationKualitasLemah,
+              onChanged: (value) {
+                setState(
+                  () {
+                    _circulationKualitasLemah = value;
+                  },
+                );
+              },
+            ),
+          ],
+        ));
+  }
+
+  Widget checkboxCard(
+      {required String text,
+      required bool choice,
+      required ValueChanged<bool>? onChanged}) {
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+      children: [
+        Flexible(
+          child: MyTextRegular(
+            size: 12,
+            warna: Colors.black87,
+            teks: text,
+          ),
+        ),
+        Flexible(
+          child: GFCheckbox(
+            size: GFSize.SMALL,
+            type: GFCheckboxType.square,
+            activeBgColor: MyColor.hijau2,
+            //activeIcon: const Icon(Icons.check, size: 10, color: GFColors.WHITE),,
+            onChanged: onChanged,
+            value: choice,
+            inactiveIcon: null,
+          ),
+        )
+      ],
+    );
+  }
+
+  Widget circulationKualitasText({required String text}) {
+    return Container(
+      margin: const EdgeInsets.all(1),
+      child: Column(
+        children: [
+          MyTextSemiBold(size: 12, teks: text),
+        ],
+      ),
+    );
+  }
+
+  GFCard circulationKualitasKuat() {
+    return GFCard(
+      margin: const EdgeInsets.all(1),
+      padding: const EdgeInsets.symmetric(horizontal: 5, vertical: 5),
+      content: Column(
+        children: [
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              Flexible(
+                child: MyTextRegular(
+                  size: 12,
+                  warna: Colors.black87,
+                  teks: 'Kuat',
+                ),
+              ),
+              Flexible(
+                child: GFCheckbox(
+                  size: GFSize.SMALL,
+                  type: GFCheckboxType.basic,
+                  activeBgColor: MyColor.hijau2,
+                  //activeIcon: const Icon(Icons.check, size: 10, color: GFColors.WHITE),,
+                  onChanged: (value) {
+                    setState(() {
+                      _circulationKualitasIrregular = value;
+                      print(
+                          'value breathing _circulationKualitasIrregular  $_circulationKualitasIrregular ');
+                    });
+                  },
+                  value: _circulationKualitasIrregular,
+                  inactiveIcon: null,
+                ),
+              )
+            ],
           ),
         ],
       ),
@@ -247,7 +1965,7 @@ class _SurveyPage2State extends State<SurveyPage2> {
                 child: MyTextRegular(
                   size: 12,
                   warna: Colors.black87,
-                  teks: 'Regular',
+                  teks: 'Irregular',
                 ),
               ),
               Flexible(
@@ -479,6 +2197,11 @@ class _SurveyPage2State extends State<SurveyPage2> {
       state: currentStep > 3 ? StepState.complete : StepState.indexed,
       isActive: currentStep >= 3,
       title: const Text("Breathing"),
+      subtitle: MyTextRegular(
+        size: 10,
+        warna: Colors.black54,
+        teks: 'Isian Breathing Pasien',
+      ),
       content: Column(
         children: [
           buildBreathingOption(),
@@ -518,12 +2241,22 @@ class _SurveyPage2State extends State<SurveyPage2> {
         const SizedBox(
           height: 5,
         ),
-        textFld(ctrl: ctrlNoReg, txt: 'Masalah Keperawatan'),
-        //Flexible(child: textFld(ctrl: ctrlNoReg, txt: 'Masalah Keperawatan')),
+        textFld(
+            ctrl: ctrlBreatingMasalahKeperawatan,
+            txt: 'Masalah Keperawatan',
+            onChanged: (value) {
+              ctrlBreatingMasalahKeperawatan.text = value;
+            }),
+        // Flexible(child: textFld(ctrl: ctrlNoReg, txt: 'Masalah Keperawatan')),
         const SizedBox(
           height: 5,
         ),
-        textFld(ctrl: ctrlNoReg, txt: 'Tindakan')
+        textFld(
+            ctrl: ctrlBreatingTindakan,
+            txt: 'Tindakan',
+            onChanged: (value) {
+              ctrlBreatingTindakan.text = value;
+            })
         // Flexible(child: textFld(ctrl: ctrlNoReg, txt: 'Tindakan')),
       ],
     );
@@ -569,11 +2302,25 @@ class _SurveyPage2State extends State<SurveyPage2> {
           ),
           Row(
             children: [
-              Flexible(child: textFld(ctrl: ctrlNoReg, txt: 'Kanan')),
+              Flexible(
+                  child: textFld(
+                ctrl: ctrlAbsenKanan,
+                txt: 'Kanan',
+                onChanged: (value) {
+                  ctrlAbsenKanan.text = value;
+                },
+              )),
               const SizedBox(
                 width: 5,
               ),
-              Flexible(child: textFld(ctrl: ctrlNoReg, txt: 'Kiri')),
+              Flexible(
+                  child: textFld(
+                ctrl: ctrlAbsenKiri,
+                txt: 'Kiri',
+                onChanged: (value) {
+                  ctrlAbsenKiri.text = value;
+                },
+              )),
             ],
           ),
         ],
@@ -621,11 +2368,25 @@ class _SurveyPage2State extends State<SurveyPage2> {
           ),
           Row(
             children: [
-              Flexible(child: textFld(ctrl: ctrlNoReg, txt: 'Kanan')),
+              Flexible(
+                  child: textFld(
+                ctrl: ctrlCreckelsKanan,
+                txt: 'Kanan',
+                onChanged: (value) {
+                  ctrlCreckelsKanan.text = value;
+                },
+              )),
               const SizedBox(
                 width: 5,
               ),
-              Flexible(child: textFld(ctrl: ctrlNoReg, txt: 'Kiri')),
+              Flexible(
+                  child: textFld(
+                ctrl: ctrlCreckelsKiri,
+                txt: 'Kiri',
+                onChanged: (value) {
+                  ctrlCreckelsKiri.text = value;
+                },
+              )),
             ],
           ),
         ],
@@ -673,11 +2434,25 @@ class _SurveyPage2State extends State<SurveyPage2> {
           ),
           Row(
             children: [
-              Flexible(child: textFld(ctrl: ctrlNoReg, txt: 'Kanan')),
+              Flexible(
+                  child: textFld(
+                ctrl: ctrlWheezeKanan,
+                txt: 'Kanan',
+                onChanged: (value) {
+                  ctrlWheezeKanan.text = value;
+                },
+              )),
               const SizedBox(
                 width: 5,
               ),
-              Flexible(child: textFld(ctrl: ctrlNoReg, txt: 'Kiri')),
+              Flexible(
+                  child: textFld(
+                ctrl: ctrlWheezeKiri,
+                txt: 'Kiri',
+                onChanged: (value) {
+                  ctrlWheezeKiri.text = value;
+                },
+              )),
             ],
           ),
         ],
@@ -725,11 +2500,25 @@ class _SurveyPage2State extends State<SurveyPage2> {
           ),
           Row(
             children: [
-              Flexible(child: textFld(ctrl: ctrlNoReg, txt: 'Kanan')),
+              Flexible(
+                  child: textFld(
+                ctrl: ctrlRochiKanan,
+                txt: 'Kanan',
+                onChanged: (value) {
+                  ctrlRochiKanan.text = value;
+                },
+              )),
               const SizedBox(
                 width: 5,
               ),
-              Flexible(child: textFld(ctrl: ctrlNoReg, txt: 'Kiri')),
+              Flexible(
+                  child: textFld(
+                ctrl: ctrlRochiKiri,
+                txt: 'Kiri',
+                onChanged: (value) {
+                  ctrlRochiKiri.text = value;
+                },
+              )),
             ],
           ),
         ],
@@ -782,11 +2571,25 @@ class _SurveyPage2State extends State<SurveyPage2> {
           ),
           Row(
             children: [
-              Flexible(child: textFld(ctrl: ctrlNoReg, txt: 'Kanan')),
+              Flexible(
+                  child: textFld(
+                ctrl: ctrlJelasKanan,
+                txt: 'Kanan',
+                onChanged: (value) {
+                  ctrlJelasKanan.text = value;
+                },
+              )),
               const SizedBox(
                 width: 5,
               ),
-              Flexible(child: textFld(ctrl: ctrlNoReg, txt: 'Kiri')),
+              Flexible(
+                  child: textFld(
+                ctrl: ctrlJelasKiri,
+                txt: 'Kiri',
+                onChanged: (value) {
+                  ctrlJelasKanan.text = value;
+                },
+              )),
             ],
           ),
         ],
@@ -1228,17 +3031,32 @@ class _SurveyPage2State extends State<SurveyPage2> {
       state: currentStep > 2 ? StepState.complete : StepState.indexed,
       isActive: currentStep >= 2,
       title: const Text("Airway"),
+      subtitle: MyTextRegular(
+        size: 10,
+        warna: Colors.black54,
+        teks: 'Isian Airway',
+      ),
       content: Column(
         children: [
           buildAirwayBox(),
           const SizedBox(
             height: 8,
           ),
-          textFld(ctrl: ctrlNoReg, txt: 'Masalah Keperawatan'),
+          textFld(
+              ctrl: ctrlMasalahKeperawatan,
+              txt: 'Masalah Keperawatan',
+              onChanged: (value) {
+                ctrlMasalahKeperawatan.text = value;
+              }),
           const SizedBox(
             height: 8,
           ),
-          textFld(ctrl: ctrlNoReg, txt: 'Tindakan'),
+          textFld(
+              ctrl: ctrlTindakan,
+              txt: 'Tindakan',
+              onChanged: (value) {
+                ctrlTindakan.text = value;
+              }),
         ],
       ),
     );
@@ -1299,21 +3117,26 @@ class _SurveyPage2State extends State<SurveyPage2> {
       state: currentStep > 1 ? StepState.complete : StepState.indexed,
       isActive: currentStep >= 1,
       title: const Text("Primary Survey"),
+      subtitle: MyTextRegular(
+        size: 10,
+        warna: Colors.black54,
+        teks: 'Isian Primary Surbey',
+      ),
       content: Column(
         children: [
           buildTriase(),
           const SizedBox(
             height: 8,
           ),
-          textFld(ctrl: ctrlNoReg, txt: 'Tinggi Badan (cm)'),
+          // textFld(ctrl: ctrlNoReg, txt: 'Tinggi Badan (cm)'),
           const SizedBox(
             height: 8,
           ),
-          textFld(ctrl: ctrlNoReg, txt: 'Berat Badan Sebelumnya (Kg)'),
+          // textFld(ctrl: ctrlNoReg, txt: 'Berat Badan Sebelumnya (Kg)'),
           const SizedBox(
             height: 8,
           ),
-          textFld(ctrl: ctrlNoReg, txt: 'Berat Badan Sekarang (Kg)'),
+          // textFld(ctrl: ctrlNoReg, txt: 'Berat Badan Sekarang (Kg)'),
           buildBeratBadanSekarang(),
           const SizedBox(
             height: 8,
@@ -1325,13 +3148,27 @@ class _SurveyPage2State extends State<SurveyPage2> {
                 teks: 'TD ',
                 warna: Colors.black87,
               ),
-              Flexible(child: textFld(ctrl: ctrlNoReg, txt: '')),
+              Flexible(
+                  child: textFld(
+                ctrl: ctrlTD1,
+                txt: '',
+                onChanged: (value) {
+                  ctrlTD1.text = value;
+                },
+              )),
               MyTextRegular(
                 size: 15,
                 teks: ' / ',
                 warna: Colors.black87,
               ),
-              Flexible(child: textFld(ctrl: ctrlNoReg, txt: '')),
+              Flexible(
+                  child: textFld(
+                ctrl: ctrlTD2,
+                txt: '',
+                onChanged: (value) {
+                  ctrlTD2.text = value;
+                },
+              )),
               MyTextRegular(
                 size: 15,
                 teks: ' MmHg',
@@ -1345,19 +3182,39 @@ class _SurveyPage2State extends State<SurveyPage2> {
               Flexible(child: buildTD2()),
             ],
           ),
-          textFld(ctrl: ctrlNoReg, txt: 'HR (x/menit)'),
+          textFld(
+              ctrl: ctrlHR,
+              txt: 'HR (x/menit)',
+              onChanged: (value) {
+                ctrlHR.text = value;
+              }),
           const SizedBox(
             height: 8,
           ),
-          textFld(ctrl: ctrlNoReg, txt: 'Resporatory Rate (x/menit)'),
+          textFld(
+              ctrl: ctrlRepositoryRate,
+              txt: 'Resporatory Rate (x/menit)',
+              onChanged: (value) {
+                ctrlRepositoryRate.text = value;
+              }),
           const SizedBox(
             height: 8,
           ),
-          textFld(ctrl: ctrlNoReg, txt: 'SaO2 (%)'),
+          textFld(
+              ctrl: ctrlSaO2,
+              txt: 'SaO2 (%)',
+              onChanged: (value) {
+                ctrlSaO2.text = value;
+              }),
           const SizedBox(
             height: 8,
           ),
-          textFld(ctrl: ctrlNoReg, txt: 'Temperature (C)'),
+          textFld(
+              ctrl: ctrlTemperature,
+              txt: 'Temperature (C)',
+              onChanged: (value) {
+                ctrlTemperature.text = value;
+              }),
           Row(
             children: [
               Flexible(child: buildTemperature1()),
@@ -1630,44 +3487,95 @@ class _SurveyPage2State extends State<SurveyPage2> {
           const SizedBox(
             height: 5,
           ),
-          textFld(ctrl: ctrlNoReg, txt: 'Nomor Registrasi'),
+          textFld(
+              ctrl: ctrlNoReg,
+              txt: 'Nomor Registrasi',
+              onChanged: (value) {
+                ctrlNoReg.text = value;
+              }),
           const SizedBox(
             height: 8,
           ),
-          textFld(ctrl: ctrlNoReg, txt: 'Tanggal MRS'),
+          textFld(
+              ctrl: ctrltglMRS,
+              txt: 'Tanggal Masuk RS',
+              onChanged: (value) {
+                ctrltglMRS.text = value;
+              }),
           const SizedBox(
             height: 8,
           ),
-          textFld(ctrl: ctrlNoReg, txt: 'Nama'),
+          textFld(
+              ctrl: ctrlnama,
+              txt: 'Nama',
+              onChanged: (value) {
+                ctrlnama.text = value;
+              }),
           const SizedBox(
             height: 8,
           ),
-          textFld(ctrl: ctrlNoReg, txt: 'Tgl Lahir'),
+          textFld(
+              ctrl: ctrlTglLahir,
+              txt: 'Tgl Lahir',
+              onChanged: (value) {
+                ctrlTglLahir.text = value;
+              }),
           const SizedBox(
             height: 8,
           ),
-          textFld(ctrl: ctrlNoReg, txt: 'Usia'),
+          textFld(
+              ctrl: ctrlUsia,
+              txt: 'Usia',
+              kboadType: TextInputType.number,
+              onChanged: (value) {
+                ctrlUsia.text = value;
+              }),
           const SizedBox(
             height: 8,
           ),
           buildRButtonKelamin(),
-          textFld(ctrl: ctrlNoReg, txt: 'Alamat'),
+          textFld(
+              ctrl: ctrlAlamat,
+              txt: 'Alamat',
+              onChanged: (value) {
+                ctrlAlamat.text = value;
+              }),
           const SizedBox(
             height: 8,
           ),
-          textFld(ctrl: ctrlNoReg, txt: 'Agama'),
+          textFld(
+              ctrl: ctrlAgama,
+              txt: 'Agama',
+              onChanged: (value) {
+                ctrlAgama.text = value;
+              }),
           const SizedBox(
             height: 8,
           ),
-          textFld(ctrl: ctrlNoReg, txt: 'Jenis Pembayaran'),
+          textFld(
+              ctrl: ctrlPembayran,
+              txt: 'Jenis Pembayaran',
+              onChanged: (value) {
+                ctrlPembayran.text = value;
+              }),
           const SizedBox(
             height: 8,
           ),
-          textFld(ctrl: ctrlNoReg, txt: 'Waktu Kedatangan'),
+          textFld(
+              ctrl: ctrlWaktuKedatangn,
+              txt: 'Waktu Kedatangan',
+              onChanged: (value) {
+                ctrlWaktuKedatangn.text = value;
+              }),
           const SizedBox(
             height: 8,
           ),
-          textFld(ctrl: ctrlNoReg, txt: 'Waktu Diperiksa'),
+          textFld(
+              ctrl: ctrlWaktuDiperiksa,
+              txt: 'Waktu Diperiksa',
+              onChanged: (value) {
+                ctrlWaktuDiperiksa.text = value;
+              }),
           const SizedBox(
             height: 8,
           ),
@@ -1676,13 +3584,23 @@ class _SurveyPage2State extends State<SurveyPage2> {
           const SizedBox(
             height: 8,
           ),
-          textFld(ctrl: ctrlNoReg, txt: 'Tempat dan Waktu Kejadian'),
+          textFld(
+              ctrl: ctrlTempatKejadian,
+              txt: 'Tempat dan Waktu Kejadian',
+              onChanged: (value) {
+                ctrlTempatKejadian.text = value;
+              }),
           buildKondisiKedatangan(),
           buildDiantarOleh(),
           const SizedBox(
             height: 8,
           ),
-          textFld(ctrl: ctrlNoReg, txt: 'Mekanisme'),
+          textFld(
+              ctrl: ctrlMekanisme,
+              txt: 'Mekanisme',
+              onChanged: (value) {
+                ctrlMekanisme.text = value;
+              }),
           buildInformasiDiperoleh(),
         ],
       ),

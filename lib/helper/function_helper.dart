@@ -79,8 +79,8 @@ class HipovolemiaD22 extends Penyakit {
   bool edemaPerifer;
   @override
   bool getValue() {
-    int value = 0;
-    int totalParams = 7;
+    num value = 0;
+    num totalParams = 7;
 
     if (bbSekarang == "Meningkat dalam waktu yang singkat") {
       value += 1;
@@ -103,10 +103,8 @@ class HipovolemiaD22 extends Penyakit {
     if (edemaPerifer) {
       value += 1;
     }
-
-    double result = value / totalParams;
-    double treshold = totalParams * 0.8;
-    return treshold <= result;
+    num treshold = totalParams * 0.8;
+    return treshold <= value;
   }
 }
 
@@ -176,8 +174,8 @@ class HipovolemiaD23 extends Penyakit {
   String hematokrit;
   @override
   bool getValue() {
-    int value = 0;
-    int totalParams = 8;
+    num value = 0;
+    num totalParams = 8;
 
     if (circulationMembranMurkosa == "Kering") {
       value += 1;
@@ -185,7 +183,7 @@ class HipovolemiaD23 extends Penyakit {
     if (circulationMenurun == "Menurun") {
       value += 1;
     }
-    if (circulationMenurun == "Meningkat") {
+    if (hematokrit == "Meningkat") {
       value += 1;
     }
     if (turun == "Turun") {
@@ -204,14 +202,13 @@ class HipovolemiaD23 extends Penyakit {
       value += 1;
     }
 
-    double result = value / totalParams;
-    double treshold = totalParams * 0.8;
-    return treshold <= result;
+    num treshold = totalParams * 0.8;
+    return treshold <= value;
   }
 }
 
 class HipertemiaD130 extends Penyakit {
-  HipertemiaD130({required this.temperatureTingg});
+  HipertemiaD130({required this.temperatureTinggi});
   @override
   final String name = "Hipertermia";
   @override
@@ -241,18 +238,17 @@ class HipertemiaD130 extends Penyakit {
       "Kolaborasikan pemberian cairan dan elektrolit, jika perlu",
     ]),
   ];
-  String temperatureTingg;
+  String temperatureTinggi;
   @override
   bool getValue() {
-    int value = 0;
-    int totalParams = 1;
+    num value = 0;
+    num totalParams = 1;
 
-    if (temperatureTingg == "Tinggi") {
+    if (temperatureTinggi == "Tinggi") {
       value += 1;
     }
-    double result = value / totalParams;
-    double treshold = totalParams * 0.8;
-    return treshold <= result;
+    num treshold = totalParams * 0.8;
+    return treshold <= value;
   }
 }
 
@@ -302,17 +298,16 @@ class PenurunanCurahJantung1 extends Penyakit {
   bool gambaranEKGGanguanKodenksi;
   @override
   bool getValue() {
-    int value = 0;
-    int totalParams = 2;
+    num value = 0;
+    num totalParams = 2;
     if (gambaranEKGArtimia) {
       value += 1;
     }
     if (gambaranEKGGanguanKodenksi) {
       value += 1;
     }
-    double result = value / totalParams;
-    double treshold = totalParams * 0.8;
-    return treshold <= result;
+    num treshold = totalParams * 0.8;
+    return treshold <= value;
   }
 }
 
@@ -366,8 +361,8 @@ class PenurunanCurahJantung2 extends Penyakit {
   bool kelelahan;
   @override
   bool getValue() {
-    int value = 0;
-    int totalParams = 4;
+    num value = 0;
+    num totalParams = 4;
 
     if (cvpMeningkat == "Meningkat") {
       value += 1;
@@ -382,9 +377,8 @@ class PenurunanCurahJantung2 extends Penyakit {
       value += 1;
     }
 
-    double result = value / totalParams;
-    double treshold = totalParams * 0.8;
-    return treshold <= result;
+    num treshold = totalParams * 0.8;
+    return treshold <= value;
   }
 }
 
@@ -440,8 +434,8 @@ class PenurunanCurahJantung3 extends Penyakit {
   bool dispena;
   @override
   bool getValue() {
-    int value = 0;
-    int totalParams = 5;
+    num value = 0;
+    num totalParams = 5;
     if (urineTrend == "Menurun") {
       value += 1;
     }
@@ -458,10 +452,8 @@ class PenurunanCurahJantung3 extends Penyakit {
       value += 1;
     }
 
-    double result = value / totalParams;
-    double treshold = totalParams * 0.8;
-    print("$value,$totalParams");
-    return treshold <= result;
+    num treshold = totalParams * 0.8;
+    return treshold <= value;
   }
 }
 
@@ -513,8 +505,8 @@ class BersihanJalanNafasTidakEfektifD001 extends Penyakit {
   bool penumpukanSputum;
   @override
   bool getValue() {
-    int value = 0;
-    int totalParams = 2;
+    num value = 0;
+    num totalParams = 2;
 
     if (tidakmampubatuk) {
       value += 1;
@@ -523,10 +515,8 @@ class BersihanJalanNafasTidakEfektifD001 extends Penyakit {
       value += 1;
     }
 
-    double result = value / totalParams;
-    double treshold = totalParams * 0.8;
-    print("$value,$totalParams");
-    return treshold <= result;
+    num treshold = totalParams * 0.8;
+    return treshold <= value;
   }
 }
 
@@ -579,8 +569,8 @@ class PolaNafasTidakEfektifD0005 extends Penyakit {
   bool wheeze;
   @override
   bool getValue() {
-    int value = 0;
-    int totalParams = 9;
+    num value = 0;
+    num totalParams = 9;
     if (dispnea) {
       value += 1;
     }
@@ -609,10 +599,8 @@ class PolaNafasTidakEfektifD0005 extends Penyakit {
       value += 1;
     }
 
-    double result = value / totalParams;
-    double treshold = totalParams * 0.8;
-    print("$value,$totalParams");
-    return treshold <= result;
+    num treshold = totalParams * 0.8;
+    return treshold <= value;
   }
 }
 
@@ -666,8 +654,8 @@ class NyeriAkut0007 extends Penyakit {
   bool nyeriSulitTidur;
   @override
   bool getValue() {
-    int value = 0;
-    int totalParams = 6;
+    num value = 0;
+    num totalParams = 6;
     if (frekuensiNadimeningkat == "Meningkat") {
       value += 1;
     }
@@ -686,11 +674,8 @@ class NyeriAkut0007 extends Penyakit {
     if (nyeriSulitTidur) {
       value += 1;
     }
-
-    double result = value / totalParams;
-    double treshold = totalParams * 0.8;
-    print("$value,$totalParams");
-    return treshold <= result;
+    num treshold = totalParams * 0.8;
+    return treshold <= value;
   }
 }
 
@@ -748,8 +733,8 @@ class PerfusiperifertidakefektifD0009 extends Penyakit {
   String turgorkulitmenurun;
   @override
   bool getValue() {
-    int value = 0;
-    int totalParams = 5;
+    num value = 0;
+    num totalParams = 5;
     if (turgorkulitmenurun == "Menurun") {
       value += 1;
     }
@@ -766,10 +751,8 @@ class PerfusiperifertidakefektifD0009 extends Penyakit {
       value += 1;
     }
 
-    double result = value / totalParams;
-    double treshold = totalParams * 0.8;
-    print("$value,$totalParams");
-    return treshold <= result;
+    num treshold = totalParams * 0.8;
+    return treshold <= value;
   }
 }
 

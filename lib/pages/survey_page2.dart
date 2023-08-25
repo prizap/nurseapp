@@ -461,7 +461,7 @@ class _SurveyPage2State extends State<SurveyPage2> {
           circulationMembranMurkosa: _circulationmMmbranMurkosa,
           circulationMenurun: _circulationTurgorKulit,
           hematokrit: ctrlHematokrit.text),
-      HipertemiaD130(temperatureTingg: _temperature1),
+      HipertemiaD130(temperatureTinggi: _temperature1),
       PenurunanCurahJantung1(
           gambaranEKGArtimia: _gambaranEKGAritma,
           gambaranEKGGanguanKodenksi: _gambaranEKGgangguanKonduksi),

@@ -129,12 +129,15 @@ class _ResultPageState extends State<ResultPage> {
                   ],
                 ),
               )),
-          ListView.builder(
-            shrinkWrap: true,
-            itemCount: list.length,
-            itemBuilder: (context, index) {
-              return CardTiles(penyakit: list[index]);
-            },
+          SizedBox(
+            height: MediaQuery.of(context).size.height * 0.6,
+            width: MediaQuery.of(context).size.width,
+            child: ListView.builder(
+              itemCount: list.length,
+              itemBuilder: (context, index) {
+                return CardTiles(penyakit: list[index]);
+              },
+            ),
           ),
         ],
       ),

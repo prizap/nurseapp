@@ -134,9 +134,6 @@ class _SurveyPage2State extends State<SurveyPage2> {
   var ctrlRepositoryRate = TextEditingController();
   var ctrlSaO2 = TextEditingController();
   var ctrlTemperature = TextEditingController();
-  // Step Airway
-  var ctrlMasalahKeperawatan = TextEditingController();
-  var ctrlTindakan = TextEditingController();
   // Step Breating
   var ctrlJelasKanan = TextEditingController();
   var ctrlJelasKiri = TextEditingController();
@@ -148,16 +145,12 @@ class _SurveyPage2State extends State<SurveyPage2> {
   var ctrlCreckelsKiri = TextEditingController();
   var ctrlAbsenKanan = TextEditingController();
   var ctrlAbsenKiri = TextEditingController();
-  var ctrlBreatingMasalahKeperawatan = TextEditingController();
-  var ctrlBreatingTindakan = TextEditingController();
   // Circulation
   var ctrlNadi = TextEditingController();
   var ctrlKehilanganCairan = TextEditingController();
   var ctrlurineSejamPertama = TextEditingController();
   var ctrlurineSejamKedua = TextEditingController();
   var ctrlurineSejamKetiga = TextEditingController();
-  var ctrlMasalahKeperawatanCirculation = TextEditingController();
-  var ctrlTindakanCirculation = TextEditingController();
   //Step Disabilitas
   var ctrlLainLainDisabilitas = TextEditingController();
   //Step Nyeri
@@ -194,9 +187,6 @@ class _SurveyPage2State extends State<SurveyPage2> {
     ctrlRepositoryRate.dispose();
     ctrlSaO2.dispose();
     ctrlTemperature.dispose();
-    // Step Airway
-    ctrlMasalahKeperawatan.dispose();
-    ctrlTindakan.dispose();
     // Step Breating
     ctrlJelasKanan.dispose();
     ctrlJelasKiri.dispose();
@@ -208,16 +198,12 @@ class _SurveyPage2State extends State<SurveyPage2> {
     ctrlCreckelsKiri.dispose();
     ctrlAbsenKanan.dispose();
     ctrlAbsenKiri.dispose();
-    ctrlBreatingMasalahKeperawatan.dispose();
-    ctrlBreatingTindakan.dispose();
     // Circulation
     ctrlNadi.dispose();
     ctrlKehilanganCairan.dispose();
     ctrlurineSejamPertama.dispose();
     ctrlurineSejamKedua.dispose();
     ctrlurineSejamKetiga.dispose();
-    ctrlMasalahKeperawatanCirculation.dispose();
-    ctrlTindakanCirculation.dispose();
     //Step Disabilitas
     ctrlLainLainDisabilitas.dispose();
     //Step Nyeri
@@ -380,7 +366,7 @@ class _SurveyPage2State extends State<SurveyPage2> {
     }
     if (_circulationTurgorKulit == null || _circulationTurgorKulit == "") {
       errorMassage = "";
-      errorMassage += "Dropdown Circulation Turgor Kulit  mohon diisi";
+      errorMassage += "Dropdown Circulation Turogor Kulit  mohon diisi";
       return false;
     }
     if (_urineTrend == null || _urineTrend == "") {
@@ -444,27 +430,31 @@ class _SurveyPage2State extends State<SurveyPage2> {
 
   List<Penyakit> penyakitGet() {
     return [
-      HipovolemiaD22(
+      HipervolemiaD22(
           bbSekarang: _beratSekarang,
           pnd: _breathingParoxysmal,
           edemaAnarsaka: _circulationEdemaAnarsaka,
           edemaPerifer: _circulationEdemaPerifer,
           hepatojugular: _hepatojuglar,
           jvpMeningkat: _circulationJVP,
-          ortopnea: _breathingOrtopnea),
+          ortopnea: _breathingOrtopnea,
+          cvp: _circulationCVP),
       HipovolemiaD23(
-          circulationNadi: _circulationNadiTakikardi,
           circulationKualitasLemah: _circulationKualitasLemah,
-          turun: _td1,
-          menyempit: _td2,
+          tDTurun: _td1,
+          tDMenyempit: _td2,
           nadiTakikardi: _circulationNadiTakikardi,
           circulationMembranMurkosa: _circulationmMmbranMurkosa,
-          circulationMenurun: _circulationTurgorKulit,
-          hematokrit: ctrlHematokrit.text),
+          outpitUrineMenurun: _urineTrend,
+          hematokrit: ctrlHematokrit.text,
+          circulationTugorMenurun: _circulationTurgorKulit),
       HipertemiaD130(temperatureTinggi: _temperature1),
       PenurunanCurahJantung1(
           gambaranEKGArtimia: _gambaranEKGAritma,
-          gambaranEKGGanguanKodenksi: _gambaranEKGgangguanKonduksi),
+          gambaranEKGGanguanKodenksi: _gambaranEKGgangguanKonduksi,
+          bradikardi: _circulationNadiBradikardi,
+          palpitasi: _circulationNadiPalpitasi,
+          takikardi: _circulationNadiPalpitasi),
       PenurunanCurahJantung2(
           cvpMeningkat: _circulationCVP,
           edemaLainLain: _circulationEdemaLainLain,
@@ -475,14 +465,16 @@ class _SurveyPage2State extends State<SurveyPage2> {
           crt: _circulationCRTlebihdari2,
           kulitPucat: _circulationKulitPucat,
           urineTrend: _urineTrend,
-          dispena: _breathingDispnea),
+          dispena: _breathingDispnea,
+          tDTinggiorTurun: _td1),
       BersihanJalanNafasTidakEfektifD001(
           tidakmampubatuk: _breathingBatukTidakEfektif,
-          penumpukanSputum: _breathingSputum),
+          penumpukanSputum: _breathingSputum,
+          dispnea: _breathingDispnea,
+          rochi: _breathingSuaraNafasRonchi),
       PolaNafasTidakEfektifD0005(
           dispnea: _breathingDispnea,
           frekuensiEkspirasimemanjang: _breathingFrekuensiEkspirasi,
-          jelasBersih: _breathingSuaraNafasJelas,
           penggunaanOtotbantuNafas: _breathingOtotBantuNafas,
           polanafasAbnormalmisTakipnea: _breathingNafasAbnormalTakipnea,
           polanafasAbnormalmisBradipnea: _breathingNafasAbnormalBradipnea,
@@ -1492,24 +1484,6 @@ class _SurveyPage2State extends State<SurveyPage2> {
               ),
             ),
           ),
-          Padding(
-            padding: const EdgeInsets.all(8.0),
-            child: textFld(
-                ctrl: ctrlMasalahKeperawatan,
-                txt: 'Masalah keperawatan',
-                onChanged: (value) {
-                  ctrlMasalahKeperawatan.text = value;
-                }),
-          ),
-          Padding(
-            padding: const EdgeInsets.all(8.0),
-            child: textFld(
-                ctrl: ctrlTindakanCirculation,
-                txt: 'Tindakan',
-                onChanged: (value) {
-                  ctrlTindakanCirculation.text = value;
-                }),
-          ),
         ],
       ),
     );
@@ -2241,23 +2215,6 @@ class _SurveyPage2State extends State<SurveyPage2> {
         const SizedBox(
           height: 5,
         ),
-        textFld(
-            ctrl: ctrlBreatingMasalahKeperawatan,
-            txt: 'Masalah Keperawatan',
-            onChanged: (value) {
-              ctrlBreatingMasalahKeperawatan.text = value;
-            }),
-        // Flexible(child: textFld(ctrl: ctrlNoReg, txt: 'Masalah Keperawatan')),
-        const SizedBox(
-          height: 5,
-        ),
-        textFld(
-            ctrl: ctrlBreatingTindakan,
-            txt: 'Tindakan',
-            onChanged: (value) {
-              ctrlBreatingTindakan.text = value;
-            })
-        // Flexible(child: textFld(ctrl: ctrlNoReg, txt: 'Tindakan')),
       ],
     );
   }
@@ -3042,21 +2999,6 @@ class _SurveyPage2State extends State<SurveyPage2> {
           const SizedBox(
             height: 8,
           ),
-          textFld(
-              ctrl: ctrlMasalahKeperawatan,
-              txt: 'Masalah Keperawatan',
-              onChanged: (value) {
-                ctrlMasalahKeperawatan.text = value;
-              }),
-          const SizedBox(
-            height: 8,
-          ),
-          textFld(
-              ctrl: ctrlTindakan,
-              txt: 'Tindakan',
-              onChanged: (value) {
-                ctrlTindakan.text = value;
-              }),
         ],
       ),
     );

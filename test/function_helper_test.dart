@@ -2,18 +2,19 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:nurse_application_1/helper/function_helper.dart';
 
 void main() {
-  group('testing for Hipovolemia with code D22', () {
+  group('testing for Hipervolemi with code D22', () {
     test('Should return true when all parameter correct', () {
       //arrange
       bool actualResult = true;
-      HipovolemiaD22 trueResult = HipovolemiaD22(
+      HipervolemiaD22 trueResult = HipervolemiaD22(
           hepatojugular: 'Positive',
           jvpMeningkat: 'Meningkat',
           pnd: true,
           ortopnea: true,
           edemaAnarsaka: true,
           edemaPerifer: true,
-          bbSekarang: 'Meningkat dalam waktu yang singkat');
+          bbSekarang: 'Meningkat dalam waktu yang singkat',
+          cvp: 'Meningkat');
 
       //act
       bool expectedResult = trueResult.getValue();
@@ -23,14 +24,15 @@ void main() {
     test('Should return false when all parameter incorrect', () {
       //arrange
       bool actualResult = false;
-      HipovolemiaD22 falseResult = HipovolemiaD22(
+      HipervolemiaD22 falseResult = HipervolemiaD22(
           hepatojugular: ' ',
           jvpMeningkat: ' ',
           pnd: false,
           ortopnea: false,
           edemaAnarsaka: false,
           edemaPerifer: false,
-          bbSekarang: '');
+          bbSekarang: '',
+          cvp: '');
       //act
       bool expectedResult = falseResult.getValue();
       //assert
@@ -39,14 +41,15 @@ void main() {
     test('Should return true when 80% parameter correct', () {
       //arrange
       bool actualResult = true;
-      HipovolemiaD22 trueResult = HipovolemiaD22(
+      HipervolemiaD22 trueResult = HipervolemiaD22(
           hepatojugular: 'Positive',
           jvpMeningkat: 'Meningkat',
           pnd: true,
           ortopnea: true,
           edemaAnarsaka: true,
           edemaPerifer: true,
-          bbSekarang: ' ');
+          bbSekarang: ' ',
+          cvp: 'Meningkat');
 
       //act
       bool expectedResult = trueResult.getValue();
@@ -60,13 +63,13 @@ void main() {
       bool actualResult = true;
       HipovolemiaD23 trueResult = HipovolemiaD23(
           circulationMembranMurkosa: 'Kering',
-          circulationMenurun: 'Menurun',
           hematokrit: 'Meningkat',
-          menyempit: 'Menyempit',
-          turun: 'Turun',
-          circulationNadi: true,
+          tDMenyempit: 'Menyempit',
+          tDTurun: 'Turun',
           nadiTakikardi: true,
-          circulationKualitasLemah: true);
+          circulationKualitasLemah: true,
+          circulationTugorMenurun: 'Menurun',
+          outpitUrineMenurun: 'Menurun');
       //act
       bool expectedResult = trueResult.getValue();
       //assert
@@ -77,13 +80,13 @@ void main() {
       bool actualResult = false;
       HipovolemiaD23 falseResult = HipovolemiaD23(
           circulationMembranMurkosa: ' ',
-          circulationMenurun: ' ',
+          circulationTugorMenurun: ' ',
           hematokrit: ' ',
-          menyempit: ' ',
-          turun: ' ',
-          circulationNadi: false,
+          tDMenyempit: ' ',
+          tDTurun: ' ',
           nadiTakikardi: false,
-          circulationKualitasLemah: false);
+          circulationKualitasLemah: false,
+          outpitUrineMenurun: ' ');
 
       //act
       bool expectedResult = falseResult.getValue();
@@ -94,14 +97,14 @@ void main() {
       //arrange
       bool actualResult = true;
       HipovolemiaD23 trueResult = HipovolemiaD23(
-          circulationMembranMurkosa: '',
-          circulationMenurun: 'Menurun',
+          circulationMembranMurkosa: ' ',
           hematokrit: 'Meningkat',
-          menyempit: 'Menyempit',
-          turun: 'Turun',
-          circulationNadi: true,
+          tDMenyempit: 'Menyempit',
+          tDTurun: 'Turun',
           nadiTakikardi: true,
-          circulationKualitasLemah: true);
+          circulationKualitasLemah: true,
+          circulationTugorMenurun: 'Menurun',
+          outpitUrineMenurun: 'Menurun');
       //act
       bool expectedResult = trueResult.getValue();
       //assert
@@ -138,7 +141,11 @@ void main() {
       //arrange
       bool actualResult = true;
       PenurunanCurahJantung1 trueResult = PenurunanCurahJantung1(
-          gambaranEKGArtimia: true, gambaranEKGGanguanKodenksi: true);
+          gambaranEKGArtimia: true,
+          gambaranEKGGanguanKodenksi: true,
+          bradikardi: true,
+          palpitasi: true,
+          takikardi: true);
 
       //act
       bool expectedResult = trueResult.getValue();
@@ -150,10 +157,30 @@ void main() {
       //arrange
       bool actualResult = false;
       PenurunanCurahJantung1 falseResult = PenurunanCurahJantung1(
-          gambaranEKGArtimia: false, gambaranEKGGanguanKodenksi: false);
+          gambaranEKGArtimia: false,
+          gambaranEKGGanguanKodenksi: false,
+          bradikardi: false,
+          palpitasi: false,
+          takikardi: false);
 
       //act
       bool expectedResult = falseResult.getValue();
+
+      //assert
+      expect(actualResult, expectedResult);
+    });
+    test('Should return true when 80% parameter correct', () {
+      //arrange
+      bool actualResult = true;
+      PenurunanCurahJantung1 trueResult = PenurunanCurahJantung1(
+          gambaranEKGArtimia: false,
+          gambaranEKGGanguanKodenksi: true,
+          bradikardi: true,
+          palpitasi: true,
+          takikardi: true);
+
+      //act
+      bool expectedResult = trueResult.getValue();
 
       //assert
       expect(actualResult, expectedResult);
@@ -189,7 +216,7 @@ void main() {
     });
   });
   group('testing for Penurunan Curah Jantung 3', () {
-    test('Should return true when all parameter correct', () {
+    test('Should return true when all parameter correct with Tinggi', () {
       //arrange
       bool actualResult = true;
       PenurunanCurahJantung3 trueResult = PenurunanCurahJantung3(
@@ -197,7 +224,24 @@ void main() {
           crt: true,
           dispena: true,
           kualitasLemah: true,
-          kulitPucat: true);
+          kulitPucat: true,
+          tDTinggiorTurun: 'Tinggi');
+
+      //act
+      bool expectedResult = trueResult.getValue();
+      //assert
+      expect(actualResult, expectedResult);
+    });
+    test('Should return true when all parameter correct with Turun', () {
+      //arrange
+      bool actualResult = true;
+      PenurunanCurahJantung3 trueResult = PenurunanCurahJantung3(
+          urineTrend: 'Menurun',
+          crt: true,
+          dispena: true,
+          kualitasLemah: true,
+          kulitPucat: true,
+          tDTinggiorTurun: 'Turun');
 
       //act
       bool expectedResult = trueResult.getValue();
@@ -212,25 +256,11 @@ void main() {
           crt: false,
           dispena: false,
           kualitasLemah: false,
-          kulitPucat: false);
+          kulitPucat: false,
+          tDTinggiorTurun: '');
       //act
       bool expectedResult = falseResult.getValue();
 
-      //assert
-      expect(actualResult, expectedResult);
-    });
-    test('Should return true when 80% parameter correct', () {
-      //arrange
-      bool actualResult = true;
-      PenurunanCurahJantung3 trueResult = PenurunanCurahJantung3(
-          urineTrend: ' ',
-          crt: true,
-          dispena: true,
-          kualitasLemah: true,
-          kulitPucat: true);
-
-      //act
-      bool expectedResult = trueResult.getValue();
       //assert
       expect(actualResult, expectedResult);
     });
@@ -242,7 +272,10 @@ void main() {
       bool actualResult = true;
       BersihanJalanNafasTidakEfektifD001 trueResult =
           BersihanJalanNafasTidakEfektifD001(
-              tidakmampubatuk: true, penumpukanSputum: true);
+              tidakmampubatuk: true,
+              penumpukanSputum: true,
+              dispnea: true,
+              rochi: true);
 
       //act
       bool expectedResult = trueResult.getValue();
@@ -254,7 +287,10 @@ void main() {
       bool actualResult = false;
       BersihanJalanNafasTidakEfektifD001 falseResult =
           BersihanJalanNafasTidakEfektifD001(
-              tidakmampubatuk: false, penumpukanSputum: false);
+              tidakmampubatuk: false,
+              penumpukanSputum: false,
+              dispnea: false,
+              rochi: false);
 
       //act
       bool expectedResult = falseResult.getValue();
@@ -264,19 +300,58 @@ void main() {
     });
   });
 
-  group('testing for Bersihan Jalan Nafas Tidak Efektif with code D0005', () {
+  group('testing for Pola Jalan Nafas Tidak Efektif with code D0005', () {
     test('Should return true when all parameter correct', () {
       //arrange
       bool actualResult = true;
       PolaNafasTidakEfektifD0005 trueResult = PolaNafasTidakEfektifD0005(
           dispnea: true,
           frekuensiEkspirasimemanjang: true,
-          jelasBersih: true,
           penggunaanOtotbantuNafas: true,
           polanafasAbnormalmisBradipnea: true,
           polanafasAbnormalmishiperventilasi: true,
           polanafasAbnormalmisTakipnea: true,
           ronchi: true,
+          wheeze: true);
+
+      //act
+      bool expectedResult = trueResult.getValue();
+
+      //assert
+      expect(actualResult, expectedResult);
+    });
+    test('Should return true when 80% parameter correct', () {
+      //arrange
+      bool actualResult = true;
+      PolaNafasTidakEfektifD0005 trueResult = PolaNafasTidakEfektifD0005(
+          dispnea: false,
+          frekuensiEkspirasimemanjang: true,
+          penggunaanOtotbantuNafas: true,
+          polanafasAbnormalmisBradipnea: true,
+          polanafasAbnormalmishiperventilasi: true,
+          polanafasAbnormalmisTakipnea: true,
+          ronchi: true,
+          wheeze: true);
+
+      //act
+      bool expectedResult = trueResult.getValue();
+
+      //assert
+      expect(actualResult, expectedResult);
+    });
+    test(
+        'Should return true when or parameter only one correct parameter correct',
+        () {
+      //arrange
+      bool actualResult = true;
+      PolaNafasTidakEfektifD0005 trueResult = PolaNafasTidakEfektifD0005(
+          dispnea: false,
+          frekuensiEkspirasimemanjang: true,
+          penggunaanOtotbantuNafas: true,
+          polanafasAbnormalmisBradipnea: false,
+          polanafasAbnormalmishiperventilasi: false,
+          polanafasAbnormalmisTakipnea: true,
+          ronchi: false,
           wheeze: true);
 
       //act
@@ -291,7 +366,6 @@ void main() {
       PolaNafasTidakEfektifD0005 falseResult = PolaNafasTidakEfektifD0005(
           dispnea: false,
           frekuensiEkspirasimemanjang: false,
-          jelasBersih: false,
           penggunaanOtotbantuNafas: false,
           polanafasAbnormalmisBradipnea: false,
           polanafasAbnormalmishiperventilasi: false,

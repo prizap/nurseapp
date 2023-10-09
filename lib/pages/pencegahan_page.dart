@@ -47,14 +47,12 @@ class PencegahanPages extends StatelessWidget {
 
   Widget _buildSectionHeader(String title) {
     return Padding(
-      padding: const EdgeInsets.symmetric(vertical: 8.0),
-      child: Center(
-        child: Text(
-          title,
-          style: const TextStyle(
-            fontWeight: FontWeight.bold,
-            fontSize: 16.0,
-          ),
+      padding: const EdgeInsets.all(16.0),
+      child: Text(
+        title,
+        style: const TextStyle(
+          fontWeight: FontWeight.bold,
+          fontSize: 16.0,
         ),
       ),
     );
@@ -68,7 +66,10 @@ class PencegahanPages extends StatelessWidget {
         physics: const NeverScrollableScrollPhysics(),
         itemCount: items.length,
         itemBuilder: (context, index) {
-          return CardItem(item: items[index]);
+          return CardItem(
+            item: items[index],
+            index: index,
+          );
         },
       ),
     );
@@ -76,17 +77,17 @@ class PencegahanPages extends StatelessWidget {
 }
 
 class CardItem extends StatelessWidget {
-  const CardItem({Key? key, required this.item}) : super(key: key);
+  const CardItem({Key? key, required this.item, required this.index})
+      : super(key: key);
 
   final String item;
+  final int index;
 
   @override
   Widget build(BuildContext context) {
-    return Card(
-      elevation: 2.0,
-      child: ListTile(
-        title: Text(item),
-      ),
+    return ListTile(
+      leading: const Icon(Icons.check_circle_outline, color: MyColor.hijau3),
+      title: Text(item),
     );
   }
 }

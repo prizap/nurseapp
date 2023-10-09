@@ -58,79 +58,9 @@ class _ResultPageState extends State<ResultPage> {
       ),
       body: Column(
         children: [
-          Card(
-              color: MyColor.bg,
-              elevation: 8.0,
-              child: Container(
-                padding:
-                    const EdgeInsets.symmetric(vertical: 16, horizontal: 16),
-                height: 200,
-                width: 350,
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        const Icon(Icons.person, size: 64),
-                        Column(
-                          crossAxisAlignment: CrossAxisAlignment.end,
-                          children: [
-                            Container(
-                              margin: const EdgeInsets.only(top: 8),
-                              width: 150,
-                              color: Colors.black54,
-                              height: 2,
-                            ),
-                            const SizedBox(height: 4),
-                            const Text('Alamat'),
-                            Text(widget.alamat),
-                          ],
-                        ),
-                      ],
-                    ),
-                    const SizedBox(height: 20),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Text(
-                              'Name ${widget.name}',
-                              style: const TextStyle(
-                                fontSize: 16,
-                                fontWeight: FontWeight.bold,
-                              ),
-                            ),
-                            const SizedBox(height: 4),
-                            Text('Umur ${widget.umur}'),
-                          ],
-                        ),
-                        const SizedBox(width: 32),
-                        Column(
-                          crossAxisAlignment: CrossAxisAlignment.end,
-                          children: [
-                            const Text(
-                              'Nomor registrasi',
-                              style: TextStyle(
-                                fontSize: 16,
-                                fontWeight: FontWeight.bold,
-                              ),
-                            ),
-                            const SizedBox(height: 4),
-                            Text(widget.nomorreg),
-                          ],
-                        )
-                      ],
-                    ),
-                  ],
-                ),
-              )),
+          IdentityCard(widget: widget),
           SizedBox(
-            height: MediaQuery.of(context).size.height * 0.6,
+            height: MediaQuery.of(context).size.height * 0.65,
             width: MediaQuery.of(context).size.width,
             child: ListView.builder(
               itemCount: list.length,
@@ -145,6 +75,315 @@ class _ResultPageState extends State<ResultPage> {
   }
 }
 
+class IdentityCard extends StatelessWidget {
+  const IdentityCard({super.key, required this.widget});
+  final ResultPage widget;
+
+  @override
+  Widget build(BuildContext context) {
+    return SizedBox(
+      height: MediaQuery.of(context).size.height * 0.25,
+      child: Padding(
+        padding: const EdgeInsets.all(8.0),
+        child: Card(
+          shape: RoundedRectangleBorder(
+            side: const BorderSide(color: Colors.white),
+            borderRadius: BorderRadius.circular(25.0),
+          ),
+          color: MyColor.hijau3,
+          elevation: 5.0,
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.end,
+            children: [
+              Stack(
+                children: [
+                  Image.asset('assets/imgs/Intersect.png', scale: 0.9),
+                  Column(
+                    children: [
+                      const SizedBox(
+                        height: 10,
+                      ),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceAround,
+                        children: [
+                          Container(
+                              width: 90,
+                              height: 90,
+                              decoration: BoxDecoration(
+                                  color: Colors.white,
+                                  shape: BoxShape.circle,
+                                  border: Border.all(
+                                    width: 2,
+                                    color: MyColor.ungu1,
+                                  )),
+                              child: const Icon(
+                                Icons.person,
+                                size: 80,
+                              )),
+                          SizedBox(
+                            width: MediaQuery.of(context).size.width * 0.4,
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Text(
+                                  "Nama: ${widget.name}",
+                                  style: const TextStyle(
+                                      fontSize: 16,
+                                      color: MyColor.bg,
+                                      fontWeight: FontWeight.bold,
+                                      overflow: TextOverflow.fade),
+                                ),
+                                Text(
+                                  "No: ${widget.nomorreg}",
+                                  style: const TextStyle(
+                                      fontSize: 16,
+                                      color: MyColor.bg,
+                                      fontWeight: FontWeight.bold,
+                                      overflow: TextOverflow.fade),
+                                )
+                              ],
+                            ),
+                          ),
+                        ],
+                      ),
+                      const SizedBox(
+                        height: 20,
+                      ),
+                      Padding(
+                        padding: const EdgeInsets.only(left: 8),
+                        child: Column(
+                          children: [
+                            Row(
+                              children: [
+                                const Icon(
+                                  Icons.location_pin,
+                                  color: MyColor.ungu1,
+                                  size: 24,
+                                ),
+                                SizedBox(
+                                  width:
+                                      MediaQuery.of(context).size.width * 0.7,
+                                  child: Text(
+                                    widget.alamat,
+                                    style: TextStyle(
+                                        fontSize: 16,
+                                        color: Colors.black.withAlpha(150),
+                                        fontWeight: FontWeight.bold,
+                                        overflow: TextOverflow.fade),
+                                  ),
+                                ),
+                              ],
+                            ),
+                            Row(
+                              children: [
+                                const Icon(
+                                  Icons.lock_clock,
+                                  color: MyColor.ungu1,
+                                  size: 24,
+                                ),
+                                Text(
+                                  "${widget.umur} Tahun",
+                                  style: TextStyle(
+                                      fontSize: 16,
+                                      color: Colors.black.withAlpha(150),
+                                      fontWeight: FontWeight.bold),
+                                ),
+                              ],
+                            )
+                          ],
+                        ),
+                      ),
+                    ],
+                  ),
+                ],
+              ),
+            ],
+          ),
+        ),
+      ),
+    );
+  }
+}
+
+class CardName extends StatelessWidget {
+  const CardName({super.key, required this.widget});
+  final ResultPage widget;
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      padding: const EdgeInsets.all(16),
+      color: MyColor.grey,
+      height: MediaQuery.of(context).size.height * 0.25,
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.end,
+        children: [
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceAround,
+            children: [
+              const Icon(
+                Icons.person,
+                size: 98,
+                color: MyColor.biru1,
+              ),
+              SizedBox(
+                width: MediaQuery.of(context).size.width * 0.4,
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      "Nama: ${widget.name}",
+                      style: const TextStyle(
+                          fontSize: 16,
+                          color: Colors.black,
+                          fontWeight: FontWeight.bold,
+                          overflow: TextOverflow.fade),
+                    ),
+                    Text(
+                      "No: ${widget.nomorreg}",
+                      style: const TextStyle(
+                          fontSize: 16,
+                          color: Colors.black,
+                          fontWeight: FontWeight.bold,
+                          overflow: TextOverflow.fade),
+                    )
+                  ],
+                ),
+              ),
+            ],
+          ),
+          Padding(
+            padding: const EdgeInsets.only(left: 8),
+            child: Column(
+              children: [
+                Row(
+                  children: [
+                    const Icon(
+                      Icons.location_pin,
+                      color: MyColor.hijau2,
+                      size: 24,
+                    ),
+                    SizedBox(
+                      width: MediaQuery.of(context).size.width * 0.7,
+                      child: Text(
+                        widget.alamat,
+                        style: TextStyle(
+                            fontSize: 16,
+                            color: Colors.black.withAlpha(150),
+                            fontWeight: FontWeight.bold,
+                            overflow: TextOverflow.fade),
+                      ),
+                    ),
+                  ],
+                ),
+                Row(
+                  children: [
+                    const Icon(
+                      Icons.lock_clock,
+                      color: MyColor.hijau2,
+                      size: 24,
+                    ),
+                    Text(
+                      "${widget.umur} Tahun",
+                      style: TextStyle(
+                          fontSize: 16,
+                          color: Colors.black.withAlpha(150),
+                          fontWeight: FontWeight.bold),
+                    ),
+                  ],
+                )
+              ],
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+}
+
+class OldCardName extends StatelessWidget {
+  const OldCardName({
+    super.key,
+    required this.widget,
+  });
+
+  final ResultPage widget;
+
+  @override
+  Widget build(BuildContext context) {
+    return Card(
+        color: MyColor.bg,
+        elevation: 8.0,
+        child: Container(
+          padding: const EdgeInsets.symmetric(vertical: 16, horizontal: 16),
+          height: 200,
+          width: 350,
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  const Icon(Icons.person, size: 64),
+                  Column(
+                    crossAxisAlignment: CrossAxisAlignment.end,
+                    children: [
+                      Container(
+                        margin: const EdgeInsets.only(top: 8),
+                        width: 150,
+                        color: Colors.black54,
+                        height: 2,
+                      ),
+                      const SizedBox(height: 4),
+                      const Text('Alamat'),
+                      Text(widget.alamat),
+                    ],
+                  ),
+                ],
+              ),
+              const SizedBox(height: 20),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text(
+                        'Name ${widget.name}',
+                        style: const TextStyle(
+                          fontSize: 16,
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
+                      const SizedBox(height: 4),
+                      Text('Umur ${widget.umur}'),
+                    ],
+                  ),
+                  const SizedBox(width: 32),
+                  Column(
+                    crossAxisAlignment: CrossAxisAlignment.end,
+                    children: [
+                      const Text(
+                        'Nomor registrasi',
+                        style: TextStyle(
+                          fontSize: 16,
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
+                      const SizedBox(height: 4),
+                      Text(widget.nomorreg),
+                    ],
+                  )
+                ],
+              ),
+            ],
+          ),
+        ));
+  }
+}
+
 class CardTiles extends StatelessWidget {
   const CardTiles({Key? key, required this.penyakit}) : super(key: key);
 
@@ -152,37 +391,55 @@ class CardTiles extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.symmetric(vertical: 16, horizontal: 16),
-      child: Card(
-        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),
-        clipBehavior: Clip.antiAliasWithSaveLayer,
-        elevation: 5,
-        margin: const EdgeInsets.symmetric(vertical: 8.0, horizontal: 16.0),
+    return Card(
+      shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(8),
+          side: const BorderSide(color: MyColor.hijau3)),
+      clipBehavior: Clip.antiAliasWithSaveLayer,
+      elevation: 5,
+      margin: const EdgeInsets.symmetric(vertical: 8.0, horizontal: 16.0),
+      child: Padding(
+        padding: const EdgeInsets.all(8.0),
         child: Column(
-          children: <Widget>[
-            Padding(
-              padding: const EdgeInsets.all(16.0),
-              child: Text(
-                penyakit.name,
-                style: const TextStyle(
-                  fontSize: 24.0,
-                  fontWeight: FontWeight.bold,
+          children: [
+            Row(
+              children: [
+                Text(
+                  penyakit.name,
+                  style: const TextStyle(
+                    fontSize: 20.0,
+                    fontWeight: FontWeight.bold,
+                    decoration: TextDecoration.underline,
+                  ),
                 ),
-              ),
+              ],
             ),
-            const SizedBox(height: 10),
-            Text(
-              "Langkah penanganan ${penyakit.luaranYgDigunakan}",
-              style: const TextStyle(
-                fontSize: 15,
-                color: Colors.grey,
-              ),
+            const SizedBox(
+              height: 10,
             ),
             Row(
-              mainAxisAlignment: MainAxisAlignment.end,
-              children: <Widget>[
-                TextButton(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    const Text(
+                      'Langkah penanganan',
+                      style: TextStyle(
+                        fontSize: 14,
+                        color: Colors.grey,
+                      ),
+                    ),
+                    Text(
+                      penyakit.luaranYgDigunakan,
+                      style: const TextStyle(
+                        fontSize: 16,
+                        color: Colors.grey,
+                      ),
+                    ),
+                  ],
+                ),
+                ElevatedButton(
                   onPressed: () {
                     Navigator.push(
                       context,
@@ -193,9 +450,18 @@ class CardTiles extends StatelessWidget {
                       ),
                     );
                   },
+                  style: ButtonStyle(
+                    // backgroundColor: MyColor.hijau1,
+                    backgroundColor: MaterialStateProperty.all(MyColor.hijau3),
+                    shape: MaterialStateProperty.all<RoundedRectangleBorder>(
+                      RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(10.0),
+                      ),
+                    ),
+                  ),
                   child: const Text(
-                    "Penjelasan",
-                    style: TextStyle(color: MyColor.green),
+                    "Detail",
+                    style: TextStyle(color: MyColor.bg),
                   ),
                 ),
               ],

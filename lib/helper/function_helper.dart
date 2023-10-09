@@ -6,17 +6,18 @@ abstract class Penyakit {
   bool getValue();
 }
 
-class HipovolemiaD22 extends Penyakit {
-  HipovolemiaD22(
+class HipervolemiaD22 extends Penyakit {
+  HipervolemiaD22(
       {required this.bbSekarang,
       required this.pnd,
+      required this.cvp,
       required this.edemaAnarsaka,
       required this.edemaPerifer,
       required this.hepatojugular,
       required this.jvpMeningkat,
       required this.ortopnea});
   @override
-  final String name = "Hipovomlia";
+  final String name = "Hipervolemia";
   @override
   final String code = "D.0022";
   @override
@@ -52,7 +53,7 @@ class HipovolemiaD22 extends Penyakit {
       "Monitor tekanan darah",
       "Monitor berat badan",
       "Monitor aktu pengisian kapiler",
-      "Monitor elastisitas atau turgor kulit",
+      "Monitor elastisitas atau Turogor kulit",
       "Monitor jumlah, warna, dan berat jenis urine",
       "Monitor kadar albumin dan protein total",
       "Monitor hasil pemeriksaan serum (mis. Osmolaritas serum, hematokrit, natrium, kalium, BUN)",
@@ -73,6 +74,7 @@ class HipovolemiaD22 extends Penyakit {
   String bbSekarang;
   String hepatojugular;
   String jvpMeningkat;
+  String cvp;
   bool pnd;
   bool ortopnea;
   bool edemaAnarsaka;
@@ -80,7 +82,7 @@ class HipovolemiaD22 extends Penyakit {
   @override
   bool getValue() {
     num value = 0;
-    num totalParams = 7;
+    num totalParams = 8;
 
     if (bbSekarang == "Meningkat dalam waktu yang singkat") {
       value += 1;
@@ -89,6 +91,9 @@ class HipovolemiaD22 extends Penyakit {
       value += 1;
     }
     if (jvpMeningkat == "Meningkat") {
+      value += 1;
+    }
+    if (cvp == "Meningkat") {
       value += 1;
     }
     if (pnd) {
@@ -110,16 +115,16 @@ class HipovolemiaD22 extends Penyakit {
 
 class HipovolemiaD23 extends Penyakit {
   HipovolemiaD23(
-      {required this.circulationNadi,
-      required this.circulationKualitasLemah,
-      required this.turun,
-      required this.menyempit,
+      {required this.circulationKualitasLemah,
+      required this.tDTurun,
+      required this.tDMenyempit,
       required this.nadiTakikardi,
       required this.circulationMembranMurkosa,
-      required this.circulationMenurun,
-      required this.hematokrit});
+      required this.circulationTugorMenurun,
+      required this.hematokrit,
+      required this.outpitUrineMenurun});
   @override
-  final String name = "Hipovomlia";
+  final String name = "Hipovolemi";
   @override
   final String code = "D.0023";
   @override
@@ -127,7 +132,7 @@ class HipovolemiaD23 extends Penyakit {
   @override
   final List<Pencegahan> pencegahan = [
     Pencegahan(nama: "Manajemen Hipovolemia", code: "I.03116", observasi: [
-      "Periksa tanda dan gejala hipovolemia (mis. Frekuensi nadi meningkat, Nadi teraba lemah, Tekanan darah menurun, Tekanan nadi menyempit, Turgor kulit menurun, Membran mukosa kering, Volume urine menurun, Hematokrit meningkat)",
+      "Periksa tanda dan gejala hipovolemia (mis. Frekuensi nadi meningkat, Nadi teraba lemah, Tekanan darah menurun, Tekanan nadi menyempit, Turogor kulit menurun, Membran mukosa kering, Volume urine menurun, Hematokrit meningkat)",
       "Monitor intake dan output cairan",
     ], terapeutik: [
       "PHitung kebutuhan cairan",
@@ -164,14 +169,14 @@ class HipovolemiaD23 extends Penyakit {
       "Kolaborasikan pemberian transfusi darah, jika perlu",
     ]),
   ];
-  String turun;
-  String menyempit;
-  bool circulationNadi;
+  String tDTurun;
+  String tDMenyempit;
   bool nadiTakikardi;
   bool circulationKualitasLemah;
   String circulationMembranMurkosa;
-  String circulationMenurun;
+  String circulationTugorMenurun;
   String hematokrit;
+  String outpitUrineMenurun;
   @override
   bool getValue() {
     num value = 0;
@@ -180,19 +185,19 @@ class HipovolemiaD23 extends Penyakit {
     if (circulationMembranMurkosa == "Kering") {
       value += 1;
     }
-    if (circulationMenurun == "Menurun") {
+    if (circulationTugorMenurun == "Menurun") {
       value += 1;
     }
     if (hematokrit == "Meningkat") {
       value += 1;
     }
-    if (turun == "Turun") {
+    if (tDTurun == "Turun") {
       value += 1;
     }
-    if (menyempit == "Menyempit") {
+    if (tDMenyempit == "Menyempit") {
       value += 1;
     }
-    if (circulationNadi) {
+    if (outpitUrineMenurun == "Menurun") {
       value += 1;
     }
     if (nadiTakikardi) {
@@ -254,7 +259,10 @@ class HipertemiaD130 extends Penyakit {
 
 class PenurunanCurahJantung1 extends Penyakit {
   PenurunanCurahJantung1(
-      {required this.gambaranEKGArtimia,
+      {required this.bradikardi,
+      required this.palpitasi,
+      required this.takikardi,
+      required this.gambaranEKGArtimia,
       required this.gambaranEKGGanguanKodenksi});
   @override
   final String name = "penurunan curah jantung";
@@ -296,14 +304,26 @@ class PenurunanCurahJantung1 extends Penyakit {
   ];
   bool gambaranEKGArtimia;
   bool gambaranEKGGanguanKodenksi;
+  bool takikardi;
+  bool bradikardi;
+  bool palpitasi;
   @override
   bool getValue() {
     num value = 0;
-    num totalParams = 2;
+    num totalParams = 5;
     if (gambaranEKGArtimia) {
       value += 1;
     }
     if (gambaranEKGGanguanKodenksi) {
+      value += 1;
+    }
+    if (takikardi) {
+      value += 1;
+    }
+    if (bradikardi) {
+      value += 1;
+    }
+    if (palpitasi) {
       value += 1;
     }
     num treshold = totalParams * 0.8;
@@ -384,7 +404,8 @@ class PenurunanCurahJantung2 extends Penyakit {
 
 class PenurunanCurahJantung3 extends Penyakit {
   PenurunanCurahJantung3(
-      {required this.kualitasLemah,
+      {required this.tDTinggiorTurun,
+      required this.kualitasLemah,
       required this.crt,
       required this.kulitPucat,
       required this.urineTrend,
@@ -430,13 +451,20 @@ class PenurunanCurahJantung3 extends Penyakit {
   bool kualitasLemah;
   bool crt;
   bool kulitPucat;
-  String urineTrend;
   bool dispena;
+  String tDTinggiorTurun;
+  String urineTrend;
   @override
   bool getValue() {
     num value = 0;
-    num totalParams = 5;
+    num totalParams = 7;
     if (urineTrend == "Menurun") {
+      value += 1;
+    }
+    if (tDTinggiorTurun == "Tinggi") {
+      value += 1;
+    }
+    if (tDTinggiorTurun == "Turun") {
       value += 1;
     }
     if (kualitasLemah) {
@@ -461,6 +489,8 @@ class BersihanJalanNafasTidakEfektifD001 extends Penyakit {
   BersihanJalanNafasTidakEfektifD001({
     required this.tidakmampubatuk,
     required this.penumpukanSputum,
+    required this.dispnea,
+    required this.rochi,
   });
   @override
   final String name = "Bersihan Jalan Nafas Tidak Efektif";
@@ -503,15 +533,23 @@ class BersihanJalanNafasTidakEfektifD001 extends Penyakit {
   ];
   bool tidakmampubatuk;
   bool penumpukanSputum;
+  bool dispnea;
+  bool rochi;
   @override
   bool getValue() {
     num value = 0;
-    num totalParams = 2;
+    num totalParams = 4;
 
     if (tidakmampubatuk) {
       value += 1;
     }
     if (penumpukanSputum) {
+      value += 1;
+    }
+    if (dispnea) {
+      value += 1;
+    }
+    if (rochi) {
       value += 1;
     }
 
@@ -524,7 +562,6 @@ class PolaNafasTidakEfektifD0005 extends Penyakit {
   PolaNafasTidakEfektifD0005({
     required this.dispnea,
     required this.frekuensiEkspirasimemanjang,
-    required this.jelasBersih,
     required this.penggunaanOtotbantuNafas,
     required this.polanafasAbnormalmisTakipnea,
     required this.polanafasAbnormalmisBradipnea,
@@ -564,13 +601,12 @@ class PolaNafasTidakEfektifD0005 extends Penyakit {
   bool polanafasAbnormalmisTakipnea;
   bool polanafasAbnormalmisBradipnea;
   bool polanafasAbnormalmishiperventilasi;
-  bool jelasBersih;
   bool ronchi;
   bool wheeze;
   @override
   bool getValue() {
     num value = 0;
-    num totalParams = 9;
+    num totalParams = 5;
     if (dispnea) {
       value += 1;
     }
@@ -580,24 +616,26 @@ class PolaNafasTidakEfektifD0005 extends Penyakit {
     if (frekuensiEkspirasimemanjang) {
       value += 1;
     }
-    if (polanafasAbnormalmisTakipnea) {
+    if (polanafasAbnormalmisTakipnea ||
+        polanafasAbnormalmisBradipnea ||
+        polanafasAbnormalmishiperventilasi) {
       value += 1;
     }
-    if (polanafasAbnormalmisBradipnea) {
+    // if (polanafasAbnormalmisBradipnea) {
+    //   value += 1;
+    // }
+    // if (polanafasAbnormalmishiperventilasi) {
+    //   value += 1;
+    // }
+    // if (jelasBersih) {
+    //   value += 1;
+    // }
+    if (ronchi || wheeze) {
       value += 1;
     }
-    if (polanafasAbnormalmishiperventilasi) {
-      value += 1;
-    }
-    if (jelasBersih) {
-      value += 1;
-    }
-    if (ronchi) {
-      value += 1;
-    }
-    if (wheeze) {
-      value += 1;
-    }
+    // if (wheeze) {
+    //   value += 1;
+    // }
 
     num treshold = totalParams * 0.8;
     return treshold <= value;

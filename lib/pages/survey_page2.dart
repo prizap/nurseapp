@@ -1325,14 +1325,17 @@ class _SurveyPage2State extends State<SurveyPage2> {
     );
   }
 
-  GFCard circulationCVP() {
-    return GFCard(
-      margin: const EdgeInsets.all(1),
-      padding: const EdgeInsets.symmetric(horizontal: 5, vertical: 5),
-      content: Column(
+  Widget circulationCVP() {
+    return Container(
+      //color: Colors.white70,
+      height: 60,
+      width: MediaQuery.of(context).size.width,
+      margin: const EdgeInsets.all(5),
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
-          MyTextSemiBold(
-            size: 15,
+          MyTextRegular(
+            size: 12,
             teks: 'Cental Venous Pressure',
             warna: Colors.black87,
           ),
@@ -1364,21 +1367,68 @@ class _SurveyPage2State extends State<SurveyPage2> {
                       ))
                   .toList(),
             ),
-          )
+          ),
         ],
       ),
     );
   }
 
-  GFCard circulationJVP() {
-    return GFCard(
-      margin: const EdgeInsets.all(1),
-      padding: const EdgeInsets.symmetric(horizontal: 5, vertical: 5),
-      content: Column(
+  // GFCard circulationCVP() {
+  //   return GFCard(
+  //     margin: const EdgeInsets.all(1),
+  //     padding: const EdgeInsets.symmetric(horizontal: 5, vertical: 5),
+  //     content: Column(
+  //       children: [
+  //         MyTextSemiBold(
+  //           size: 15,
+  //           teks: 'Cental Venous Pressure',
+  //           warna: Colors.black87,
+  //         ),
+  //         DropdownButtonHideUnderline(
+  //           child: GFDropdown(
+  //             isExpanded: true,
+  //             padding: const EdgeInsets.all(10),
+  //             borderRadius: BorderRadius.circular(5),
+  //             border: const BorderSide(color: Colors.black12, width: 1),
+  //             dropdownButtonColor: Colors.white,
+  //             value: _circulationCVP,
+  //             onChanged: (newValue) {
+  //               setState(() {
+  //                 _circulationCVP = newValue.toString();
+  //               });
+  //             },
+  //             items: [
+  //               'Meningkat',
+  //               'Normal',
+  //               'Menurun',
+  //             ]
+  //                 .map((value) => DropdownMenuItem(
+  //                       value: value,
+  //                       child: MyTextRegular(
+  //                         size: 12,
+  //                         warna: Colors.black87,
+  //                         teks: value,
+  //                       ),
+  //                     ))
+  //                 .toList(),
+  //           ),
+  //         )
+  //       ],
+  //     ),
+  //   );
+  // }
+  Widget circulationJVP() {
+    return Container(
+      //color: Colors.white70,
+      height: 60,
+      width: MediaQuery.of(context).size.width,
+      margin: const EdgeInsets.all(5),
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
-          MyTextSemiBold(
-            size: 15,
-            teks: 'Jugular Venous Pressure ',
+          MyTextRegular(
+            size: 12,
+            teks: 'Jugular Venous Pressure',
             warna: Colors.black87,
           ),
           DropdownButtonHideUnderline(
@@ -1414,6 +1464,50 @@ class _SurveyPage2State extends State<SurveyPage2> {
       ),
     );
   }
+  // GFCard circulationJVP() {
+  //   return GFCard(
+  //     margin: const EdgeInsets.all(1),
+  //     padding: const EdgeInsets.symmetric(horizontal: 5, vertical: 5),
+  //     content: Column(
+  //       children: [
+  //         MyTextSemiBold(
+  //           size: 15,
+  //           teks: 'Jugular Venous Pressure ',
+  //           warna: Colors.black87,
+  //         ),
+  //         DropdownButtonHideUnderline(
+  //           child: GFDropdown(
+  //             isExpanded: true,
+  //             padding: const EdgeInsets.all(10),
+  //             borderRadius: BorderRadius.circular(5),
+  //             border: const BorderSide(color: Colors.black12, width: 1),
+  //             dropdownButtonColor: Colors.white,
+  //             value: _circulationJVP,
+  //             onChanged: (newValue) {
+  //               setState(() {
+  //                 _circulationJVP = newValue.toString();
+  //               });
+  //             },
+  //             items: [
+  //               'Meningkat',
+  //               'Normal',
+  //               'Menurun',
+  //             ]
+  //                 .map((value) => DropdownMenuItem(
+  //                       value: value,
+  //                       child: MyTextRegular(
+  //                         size: 12,
+  //                         warna: Colors.black87,
+  //                         teks: value,
+  //                       ),
+  //                     ))
+  //                 .toList(),
+  //           ),
+  //         ),
+  //       ],
+  //     ),
+  //   );
+  // }
 
   GFCard circulationOutputUrine() {
     return GFCard(
@@ -3151,12 +3245,11 @@ class _SurveyPage2State extends State<SurveyPage2> {
           const SizedBox(
             height: 8,
           ),
-          textFld(
-              ctrl: ctrlTemperature,
-              txt: 'Temperature (C)',
-              onChanged: (value) {
-                ctrlTemperature.text = value;
-              }),
+          MyTextRegular(
+            size: 12,
+            teks: 'Temperature',
+            warna: Colors.black87,
+          ),
           Row(
             children: [
               Flexible(child: buildTemperature1()),

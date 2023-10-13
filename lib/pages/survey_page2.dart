@@ -1006,7 +1006,6 @@ class _SurveyPage2State extends State<SurveyPage2> {
                   onChanged: (value) {
                     setState(() {
                       _nyeriAda = value;
-                      print('value breathing _breathingOrtopnea $_nyeriAda');
                     });
                   },
                   value: _nyeriAda,
@@ -2005,8 +2004,6 @@ class _SurveyPage2State extends State<SurveyPage2> {
                   onChanged: (value) {
                     setState(() {
                       _circulationKualitasIrregular = value;
-                      print(
-                          'value breathing _circulationKualitasIrregular  $_circulationKualitasIrregular ');
                     });
                   },
                   value: _circulationKualitasIrregular,
@@ -2045,8 +2042,6 @@ class _SurveyPage2State extends State<SurveyPage2> {
                   onChanged: (value) {
                     setState(() {
                       _circulationKualitasIrregular = value;
-                      print(
-                          'value breathing _circulationKualitasIrregular  $_circulationKualitasIrregular ');
                     });
                   },
                   value: _circulationKualitasIrregular,
@@ -2085,8 +2080,6 @@ class _SurveyPage2State extends State<SurveyPage2> {
                   onChanged: (value) {
                     setState(() {
                       _circulationKualitasRegular = value;
-                      print(
-                          'value breathing _circulationKualitasRegular  $_circulationKualitasRegular ');
                     });
                   },
                   value: _circulationKualitasRegular,
@@ -2125,8 +2118,6 @@ class _SurveyPage2State extends State<SurveyPage2> {
                   onChanged: (value) {
                     setState(() {
                       _circulationNadiPalpitasi = value;
-                      print(
-                          'value breathing _circulationNadiPalpitasi  $_circulationNadiPalpitasi ');
                     });
                   },
                   value: _circulationNadiPalpitasi,
@@ -2165,8 +2156,6 @@ class _SurveyPage2State extends State<SurveyPage2> {
                   onChanged: (value) {
                     setState(() {
                       _circulationNadiBradikardi = value;
-                      print(
-                          'value breathing _circulationNadiBradikardi  $_circulationNadiBradikardi ');
                     });
                   },
                   value: _circulationNadiBradikardi,
@@ -2205,8 +2194,6 @@ class _SurveyPage2State extends State<SurveyPage2> {
                   onChanged: (value) {
                     setState(() {
                       _circulationNadiTakikardi = value;
-                      print(
-                          'value breathing _circulationNadiTakikardi  $_circulationNadiTakikardi ');
                     });
                   },
                   value: _circulationNadiTakikardi,
@@ -2245,8 +2232,6 @@ class _SurveyPage2State extends State<SurveyPage2> {
                   onChanged: (value) {
                     setState(() {
                       _circulationNadiNormal = value;
-                      print(
-                          'value breathing _circulationNadiNormal $_circulationNadiNormal');
                     });
                   },
                   value: _circulationNadiNormal,
@@ -2338,8 +2323,6 @@ class _SurveyPage2State extends State<SurveyPage2> {
                   onChanged: (value) {
                     setState(() {
                       _breathingSuaraNafasAbsent = value;
-                      print(
-                          'value breathing _breathingOrtopnea $_breathingSuaraNafasAbsent');
                     });
                   },
                   value: _breathingSuaraNafasAbsent,
@@ -2404,8 +2387,6 @@ class _SurveyPage2State extends State<SurveyPage2> {
                   onChanged: (value) {
                     setState(() {
                       _breathingSuaraNafasCreckels = value;
-                      print(
-                          'value breathing _breathingOrtopnea $_breathingSuaraNafasCreckels');
                     });
                   },
                   value: _breathingSuaraNafasCreckels,
@@ -2470,8 +2451,6 @@ class _SurveyPage2State extends State<SurveyPage2> {
                   onChanged: (value) {
                     setState(() {
                       _breathingSuaraNafasWheeze = value;
-                      print(
-                          'value breathing _breathingOrtopnea $_breathingSuaraNafasWheeze');
                     });
                   },
                   value: _breathingSuaraNafasWheeze,
@@ -2536,8 +2515,6 @@ class _SurveyPage2State extends State<SurveyPage2> {
                   onChanged: (value) {
                     setState(() {
                       _breathingSuaraNafasRonchi = value;
-                      print(
-                          'value breathing _breathingOrtopnea $_breathingSuaraNafasRonchi');
                     });
                   },
                   value: _breathingSuaraNafasRonchi,
@@ -2607,8 +2584,6 @@ class _SurveyPage2State extends State<SurveyPage2> {
                   onChanged: (value) {
                     setState(() {
                       _breathingSuaraNafasJelas = value;
-                      print(
-                          'value breathing _breathingOrtopnea $_breathingSuaraNafasJelas');
                     });
                   },
                   value: _breathingSuaraNafasJelas,
@@ -2671,8 +2646,6 @@ class _SurveyPage2State extends State<SurveyPage2> {
               onChanged: (value) {
                 setState(() {
                   _breathingOrtopnea = value;
-                  print(
-                      'value breathing _breathingOrtopnea $_breathingOrtopnea');
                 });
               },
               value: _breathingOrtopnea,
@@ -2707,8 +2680,6 @@ class _SurveyPage2State extends State<SurveyPage2> {
               onChanged: (value) {
                 setState(() {
                   _breathingParoxysmal = value;
-                  print(
-                      'value breathing breathingParoxysmal $_breathingParoxysmal');
                 });
               },
               value: _breathingParoxysmal,
@@ -2744,8 +2715,6 @@ class _SurveyPage2State extends State<SurveyPage2> {
               onChanged: (value) {
                 setState(() {
                   _breathingNafasAbnormalHiperventilasiKussmaul = value;
-                  print(
-                      'value breathing gNafasAbnormalHiperventilasiKussmaul $_breathingNafasAbnormalHiperventilasiKussmaul');
                 });
               },
               value: _breathingNafasAbnormalHiperventilasiKussmaul,
@@ -2780,8 +2749,6 @@ class _SurveyPage2State extends State<SurveyPage2> {
               onChanged: (value) {
                 setState(() {
                   _breathingNafasAbnormalBradipnea = value;
-                  print(
-                      'value breathing NafasAbnormalBradipnea $_breathingNafasAbnormalBradipnea');
                 });
               },
               value: _breathingNafasAbnormalBradipnea,
@@ -2816,8 +2783,6 @@ class _SurveyPage2State extends State<SurveyPage2> {
               onChanged: (value) {
                 setState(() {
                   _breathingNafasAbnormalTakipnea = value;
-                  print(
-                      'value breathing NafasAbnormalTakipnea $_breathingNafasAbnormalTakipnea');
                 });
               },
               value: _breathingNafasAbnormalTakipnea,
@@ -2852,8 +2817,6 @@ class _SurveyPage2State extends State<SurveyPage2> {
               onChanged: (value) {
                 setState(() {
                   _breathingFrekuensiEkspirasi = value;
-                  print(
-                      'value breathing Otot Bantu Nafas $_breathingFrekuensiEkspirasi');
                 });
               },
               value: _breathingFrekuensiEkspirasi,
@@ -2888,8 +2851,6 @@ class _SurveyPage2State extends State<SurveyPage2> {
               onChanged: (value) {
                 setState(() {
                   _breathingOtotBantuNafas = value;
-                  print(
-                      'value breathing Otot Bantu Nafas $_breathingOtotBantuNafas');
                 });
               },
               value: _breathingOtotBantuNafas,
@@ -2924,7 +2885,6 @@ class _SurveyPage2State extends State<SurveyPage2> {
               onChanged: (value) {
                 setState(() {
                   _breathingDispnea = value;
-                  print('value breathing Dispena $_breathingDispnea');
                 });
               },
               value: _breathingDispnea,
@@ -2959,7 +2919,6 @@ class _SurveyPage2State extends State<SurveyPage2> {
               onChanged: (value) {
                 setState(() {
                   _breathingSputum = value;
-                  print('value breathing sputum $_breathingSputum');
                 });
               },
               value: _breathingSputum,
@@ -2994,8 +2953,6 @@ class _SurveyPage2State extends State<SurveyPage2> {
               onChanged: (value) {
                 setState(() {
                   _breathingBatukTidakEfektif = value;
-                  print(
-                      'value breathing tidak efektif $_breathingBatukTidakEfektif');
                 });
               },
               value: _breathingBatukTidakEfektif,
@@ -3030,7 +2987,6 @@ class _SurveyPage2State extends State<SurveyPage2> {
               onChanged: (value) {
                 setState(() {
                   _breathingAda = value;
-                  print('value breathing ada $_breathingAda');
                 });
               },
               value: _breathingAda,
@@ -3065,7 +3021,6 @@ class _SurveyPage2State extends State<SurveyPage2> {
               onChanged: (value) {
                 setState(() {
                   _breathingNormal = value;
-                  print('value breathing normal $_breathingNormal');
                 });
               },
               value: _breathingNormal,

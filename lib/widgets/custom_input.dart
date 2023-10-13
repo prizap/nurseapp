@@ -123,10 +123,6 @@ class MyCheckBox extends StatefulWidget {
 }
 
 class _MyCheckBoxState extends State<MyCheckBox> {
-  void _handleTap(bool newVal) {
-    widget.onChanged(!widget.active);
-  }
-
   @override
   Widget build(BuildContext context) {
     return GFCard(

@@ -170,6 +170,8 @@ class IdentityCard extends StatelessWidget {
                                         color: Colors.black.withAlpha(150),
                                         fontWeight: FontWeight.bold,
                                         overflow: TextOverflow.fade),
+                                    overflow: TextOverflow.ellipsis,
+                                    maxLines: 1,
                                   ),
                                 ),
                               ],
@@ -187,6 +189,8 @@ class IdentityCard extends StatelessWidget {
                                       fontSize: 16,
                                       color: Colors.black.withAlpha(150),
                                       fontWeight: FontWeight.bold),
+                                  overflow: TextOverflow.ellipsis,
+                                  maxLines: 1,
                                 ),
                               ],
                             )
@@ -202,185 +206,6 @@ class IdentityCard extends StatelessWidget {
         ),
       ),
     );
-  }
-}
-
-class CardName extends StatelessWidget {
-  const CardName({super.key, required this.widget});
-  final ResultPage widget;
-
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      padding: const EdgeInsets.all(16),
-      color: MyColor.grey,
-      height: MediaQuery.of(context).size.height * 0.25,
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.end,
-        children: [
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceAround,
-            children: [
-              const Icon(
-                Icons.person,
-                size: 98,
-                color: MyColor.biru1,
-              ),
-              SizedBox(
-                width: MediaQuery.of(context).size.width * 0.4,
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Text(
-                      "Nama: ${widget.name}",
-                      style: const TextStyle(
-                          fontSize: 16,
-                          color: Colors.black,
-                          fontWeight: FontWeight.bold,
-                          overflow: TextOverflow.fade),
-                    ),
-                    Text(
-                      "No: ${widget.nomorreg}",
-                      style: const TextStyle(
-                          fontSize: 16,
-                          color: Colors.black,
-                          fontWeight: FontWeight.bold,
-                          overflow: TextOverflow.fade),
-                    )
-                  ],
-                ),
-              ),
-            ],
-          ),
-          Padding(
-            padding: const EdgeInsets.only(left: 8),
-            child: Column(
-              children: [
-                Row(
-                  children: [
-                    const Icon(
-                      Icons.location_pin,
-                      color: MyColor.hijau2,
-                      size: 24,
-                    ),
-                    SizedBox(
-                      width: MediaQuery.of(context).size.width * 0.7,
-                      child: Text(
-                        widget.alamat,
-                        style: TextStyle(
-                            fontSize: 16,
-                            color: Colors.black.withAlpha(150),
-                            fontWeight: FontWeight.bold,
-                            overflow: TextOverflow.fade),
-                      ),
-                    ),
-                  ],
-                ),
-                Row(
-                  children: [
-                    const Icon(
-                      Icons.lock_clock,
-                      color: MyColor.hijau2,
-                      size: 24,
-                    ),
-                    Text(
-                      "${widget.umur} Tahun",
-                      style: TextStyle(
-                          fontSize: 16,
-                          color: Colors.black.withAlpha(150),
-                          fontWeight: FontWeight.bold),
-                    ),
-                  ],
-                )
-              ],
-            ),
-          ),
-        ],
-      ),
-    );
-  }
-}
-
-class OldCardName extends StatelessWidget {
-  const OldCardName({
-    super.key,
-    required this.widget,
-  });
-
-  final ResultPage widget;
-
-  @override
-  Widget build(BuildContext context) {
-    return Card(
-        color: MyColor.bg,
-        elevation: 8.0,
-        child: Container(
-          padding: const EdgeInsets.symmetric(vertical: 16, horizontal: 16),
-          height: 200,
-          width: 350,
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  const Icon(Icons.person, size: 64),
-                  Column(
-                    crossAxisAlignment: CrossAxisAlignment.end,
-                    children: [
-                      Container(
-                        margin: const EdgeInsets.only(top: 8),
-                        width: 150,
-                        color: Colors.black54,
-                        height: 2,
-                      ),
-                      const SizedBox(height: 4),
-                      const Text('Alamat'),
-                      Text(widget.alamat),
-                    ],
-                  ),
-                ],
-              ),
-              const SizedBox(height: 20),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Text(
-                        'Name ${widget.name}',
-                        style: const TextStyle(
-                          fontSize: 16,
-                          fontWeight: FontWeight.bold,
-                        ),
-                      ),
-                      const SizedBox(height: 4),
-                      Text('Umur ${widget.umur}'),
-                    ],
-                  ),
-                  const SizedBox(width: 32),
-                  Column(
-                    crossAxisAlignment: CrossAxisAlignment.end,
-                    children: [
-                      const Text(
-                        'Nomor registrasi',
-                        style: TextStyle(
-                          fontSize: 16,
-                          fontWeight: FontWeight.bold,
-                        ),
-                      ),
-                      const SizedBox(height: 4),
-                      Text(widget.nomorreg),
-                    ],
-                  )
-                ],
-              ),
-            ],
-          ),
-        ));
   }
 }
 
